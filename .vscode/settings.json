@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true
+    },
+    "explorerExclude.backup": {},
+    "fluttergpt.apiKey": "AIzaSyAc1DGWUW6P6PX8kaTEYYszX9GgWdwjszs",
+    "bitoAI.codeCompletion.enableAutoCompletion": true
+}

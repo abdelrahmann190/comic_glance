@@ -19,7 +19,7 @@ VolumeModel _$VolumeModelFromJson(Map<String, dynamic> json) => VolumeModel(
       deck: json['deck'] as String?,
       description: json['description'] as String?,
       id: json['id'] as int?,
-      imageMap: json['image'] as Map<String, dynamic>?,
+      imageMap: ImageModel.fromJson(json['image'] as Map<String, dynamic>),
       name: json['name'] as String?,
       siteDetailUrl: json['site_detail_url'] as String?,
     );
@@ -38,7 +38,7 @@ Map<String, dynamic> _$VolumeModelToJson(VolumeModel instance) =>
       'deck': instance.deck,
       'description': instance.description,
       'id': instance.id,
-      'image': instance.imageMap,
+      'image': ImageModel.toJson(instance.imageMap),
       'name': instance.name,
       'site_detail_url': instance.siteDetailUrl,
     };

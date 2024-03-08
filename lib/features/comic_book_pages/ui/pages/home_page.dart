@@ -1,5 +1,6 @@
 import 'package:comic_glance/core/consts/app_strings.dart';
 import 'package:comic_glance/core/di/getit_di.dart';
+import 'package:comic_glance/core/helpers/enums.dart';
 import 'package:comic_glance/core/helpers/extensions.dart';
 import 'package:comic_glance/core/theming/theme_controller.dart';
 import 'package:comic_glance/core/widgets/body_header_text_bold.dart';
@@ -12,16 +13,23 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class HomePage extends StatelessWidget {
-  final themeController = getItInstance<ThemeController>();
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-  HomePage({super.key});
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final themeController = getItInstance<ThemeController>();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: RefreshIndicator(
         onRefresh: () async {
+          await loadHomePageScreen();
+
           await Future.delayed(
             const Duration(
               seconds: 2,
@@ -57,34 +65,40 @@ class HomePage extends StatelessWidget {
               data: 'Issues for you',
             ),
             Gap(15.px),
-            BlocProvider(
-              create: (context) =>
-                  getItInstance<ComicBooksCubit>()..getForYouIssuesList(),
-              child: const ComicBooksList(),
+            const ComicBooksList(
+              loadWhenState: HomeScreenState.issuesForYou,
             ),
             Gap(15.px),
             const BodyHeaderText(
               data: 'Most recent volumes',
             ),
             Gap(15.px),
-            BlocProvider(
-              create: (context) =>
-                  getItInstance<ComicBooksCubit>()..getMostRecentVolumesList(),
-              child: const ComicBooksList(),
+            const ComicBooksList(
+              loadWhenState: HomeScreenState.mostRecentVolumes,
             ),
             Gap(15.px),
             const BodyHeaderText(
               data: 'Popular publishers',
             ),
             Gap(15.px),
-            BlocProvider(
-              create: (context) =>
-                  getItInstance<ComicBooksCubit>()..getPopularPublishersList(),
-              child: const ComicBooksList(),
+            const ComicBooksList(
+              loadWhenState: HomeScreenState.popularPublishers,
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> loadHomePageScreen() async {
+    context.read<ComicBooksCubit>().getPopularPublishersList();
+    context.read<ComicBooksCubit>().getForYouIssuesList();
+    context.read<ComicBooksCubit>().getMostRecentVolumesList();
+  }
+
+  @override
+  void initState() {
+    loadHomePageScreen();
+    super.initState();
   }
 }

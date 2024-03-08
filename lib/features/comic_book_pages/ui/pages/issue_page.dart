@@ -34,22 +34,20 @@ class _IssuePageState extends State<IssuePage> {
           ),
           child: BlocBuilder<ComicBooksCubit, ComicBooksState>(
             builder: (context, state) {
-              return state.when(
-                initial: () {
-                  return const SizedBox.shrink();
-                },
-                loading: () {
-                  return const Center(child: LoadingWidget());
-                },
-                success: buildSuccessSection,
-                loadingError: (error) {
-                  // return ViewLinkWidget(
-                  //   navigationLink: widget.navigationLink,
-                  //   controller: controller,
-                  // );
-                  return Container();
-                },
-              );
+              return state.whenOrNull(
+                    loading: () {
+                      return const Center(child: LoadingWidget());
+                    },
+                    success: buildSuccessSection,
+                    loadingError: (error) {
+                      // return ViewLinkWidget(
+                      //   navigationLink: widget.navigationLink,
+                      //   controller: controller,
+                      // );
+                      return Container();
+                    },
+                  ) ??
+                  const SizedBox.shrink();
             },
           ),
         ),
@@ -61,7 +59,7 @@ class _IssuePageState extends State<IssuePage> {
     final issueModel = data as IssueModel;
     return SingleChildScrollView(
       child: Container(
-        height: MediaQuery.of(context).size.height,
+        height: 100.h,
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,

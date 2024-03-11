@@ -28,7 +28,7 @@ class _BottomNavigationBarMainPageState
   final List<Widget> _scaffoldBodyWidgetsList = [
     BlocProvider(
       create: (context) => getItInstance<ComicBooksCubit>(),
-      child: HomePage(),
+      child: const HomePage(),
     ),
     Container(),
     Container(),

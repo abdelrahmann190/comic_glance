@@ -1,6 +1,8 @@
 import 'package:comic_glance/core/di/getit_di.dart';
 import 'package:comic_glance/core/networking/api_constants.dart';
 import 'package:comic_glance/core/networking/auth_state.dart';
+import 'package:comic_glance/core/networking/connection_checker.dart';
+import 'package:comic_glance/core/pages/no_internet_connection_page.dart';
 import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/features/bottom_navigation/ui/pages/bottom_navigation_bar_main_page.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
@@ -15,7 +17,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  static Route? generateRoute(RouteSettings settings) {
+  final bool _internetConnection;
+
+  AppRouter(this._internetConnection);
+  Route? generateRoute(RouteSettings settings) {
+    if (_internetConnection) {
+      return _buildAuthenticatedRoute(settings);
+    } else {
+      return MaterialPageRoute(
+        builder: (_) => const NoInternetConnectionPage(),
+      );
+    }
+  }
+
+  Route? _buildAuthenticatedRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.loginPage:
         return MaterialPageRoute(
@@ -30,38 +45,15 @@ class AppRouter {
           builder: (_) => const BottomNavigationBarMainPage(),
         );
       case AppRoutes.issuePage:
-        return AuthenticatedRoute(builder: (_) {
-          final navigationMap = settings.arguments as Map;
-          return BlocProvider(
-            create: (context) => getItInstance<ComicBooksCubit>(),
-            child: IssuePage(
-              issueLink: navigationMap[ApiConstants.apiNavLink] as String,
-              navigationLink: navigationMap[ApiConstants.siteNavLink] as String,
-            ),
-          );
-        });
       case AppRoutes.volumePage:
-        return AuthenticatedRoute(builder: (_) {
-          final navigationMap = settings.arguments as Map;
-          return BlocProvider(
-            create: (context) => getItInstance<ComicBooksCubit>(),
-            child: VolumePage(
-              issueLink: navigationMap[ApiConstants.apiNavLink] as String,
-              navigationLink: navigationMap[ApiConstants.siteNavLink] as String,
-            ),
-          );
-        });
       case AppRoutes.publisherPage:
-        return AuthenticatedRoute(builder: (_) {
-          final navigationMap = settings.arguments as Map;
-          return BlocProvider(
-            create: (context) => getItInstance<ComicBooksCubit>(),
-            child: PublisherPage(
-              issueLink: navigationMap[ApiConstants.apiNavLink] as String,
-              navigationLink: navigationMap[ApiConstants.siteNavLink] as String,
-            ),
-          );
-        });
+        return _buildAuthenticatedPageRoute(
+          settings,
+          (issueLink, navigationLink) => IssuePage(
+            issueLink: issueLink,
+            navigationLink: navigationLink,
+          ),
+        );
       case AppRoutes.showMorePage:
         return AuthenticatedRoute(
           builder: (_) => ShowMorePage(
@@ -72,13 +64,27 @@ class AppRouter {
         return null;
     }
   }
+
+  Route _buildAuthenticatedPageRoute(
+      RouteSettings settings, Widget Function(String, String) pageBuilder) {
+    final navigationMap = settings.arguments as Map;
+    return AuthenticatedRoute(
+      builder: (_) => BlocProvider(
+        create: (context) => getItInstance<ComicBooksCubit>(),
+        child: pageBuilder(
+          navigationMap[ApiConstants.apiNavLink] as String,
+          navigationMap[ApiConstants.siteNavLink] as String,
+        ),
+      ),
+    );
+  }
 }
 
 class AuthenticatedRoute extends MaterialPageRoute {
   AuthenticatedRoute({required WidgetBuilder builder})
       : super(
           builder: (context) {
-            return true ? builder(context) : const LoginPage();
+            return false ? builder(context) : const LoginPage();
           },
         );
 }

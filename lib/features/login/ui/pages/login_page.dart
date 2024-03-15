@@ -1,19 +1,42 @@
+import 'package:comic_glance/core/di/getit_di.dart';
 import 'package:comic_glance/core/helpers/extensions.dart';
-import 'package:comic_glance/core/widgets/custom_text_field.dart';
 import 'package:comic_glance/core/widgets/main_page_header_text.dart';
+import 'package:comic_glance/core/widgets/round_text_button.dart';
+import 'package:comic_glance/features/login/logic/cubit/login_cubit.dart';
+import 'package:comic_glance/features/login/ui/widgets/login_bloclistner.dart';
+import 'package:comic_glance/features/login/ui/widgets/login_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getItInstance<LoginCubit>(),
+      child: const LoginScreen(),
+    );
+  }
+}
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 25.h),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/batman_bg.jpg'),
@@ -24,7 +47,7 @@ class LoginPage extends StatelessWidget {
         child: Center(
           child: Container(
             width: 80.w,
-            height: 60.h,
+            height: 50.h,
             padding: EdgeInsets.symmetric(
               horizontal: 15.px,
               vertical: 15.px,
@@ -38,19 +61,16 @@ class LoginPage extends StatelessWidget {
               children: [
                 const MainPageHeaderText(data: 'Log in'),
                 Gap(30.px),
-                CustomTextField(
-                  hintText: 'user name',
-                  icon: Icons.email,
-                  controller: TextEditingController(),
-                  isPasswordField: false,
-                ),
+                const LoginForm(),
                 Gap(15.px),
-                CustomTextField(
-                  hintText: 'password',
-                  icon: Icons.lock,
-                  controller: TextEditingController(),
-                  isPasswordField: true,
+                RoundTextbutton(
+                  color: context.appTheme.canvasColor,
+                  data: 'Login',
+                  onTap: () {
+                    context.read<LoginCubit>().emitLoginState();
+                  },
                 ),
+                const LoginBlocListener(),
               ],
             ),
           ),
@@ -58,4 +78,6 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
+  void setupErrorState(BuildContext context, String error) {}
 }

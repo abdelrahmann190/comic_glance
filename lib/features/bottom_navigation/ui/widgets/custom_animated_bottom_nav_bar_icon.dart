@@ -33,7 +33,7 @@ class CustomAnimatedBottomNavBarIcon extends StatelessWidget {
                 pressedIconPath,
                 key: const ValueKey('after'),
                 colorFilter: ColorFilter.mode(
-                  context.appTheme.primaryColor,
+                  context.appCustomTheme.primaryColor,
                   BlendMode.srcATop,
                 ),
               )
@@ -41,7 +41,7 @@ class CustomAnimatedBottomNavBarIcon extends StatelessWidget {
                 unPressedIconPath,
                 key: const ValueKey('before'),
                 colorFilter: ColorFilter.mode(
-                  context.appTheme.bottomNavigationBarTheme
+                  context.appCustomTheme.bottomNavigationBarTheme
                           .unselectedItemColor ??
                       AppColorsManager.lightGrey,
                   BlendMode.srcATop,

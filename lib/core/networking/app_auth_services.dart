@@ -26,23 +26,7 @@ class AppAuthServices {
   }
 }
 
-void getUserData() {
+Stream<User?> get user {
   User? user = FirebaseAuth.instance.currentUser;
-
-  if (user != null) {
-    // User is signed in
-    String uid = user.uid; // Unique identifier for the user
-    String? email = user.email;
-    String? displayName = user.displayName;
-    String? photoURL = user.photoURL;
-
-    // Use the user data as needed
-    print('UID: $uid');
-    print('Email: $email');
-    print('Display Name: $displayName');
-    print('Photo URL: $photoURL');
-  } else {
-    // No user is signed in
-    print('No user is signed in.');
-  }
+  return Stream.value(user);
 }

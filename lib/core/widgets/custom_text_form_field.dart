@@ -24,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: context.appTheme.primaryColor.withOpacity(0.15),
+        color: context.appCustomTheme.primaryColor.withOpacity(0.15),
         borderRadius: BorderRadius.circular(25.px),
       ),
       child: Row(
@@ -33,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Icon(
               icon,
-              color: context.appTheme.primaryColor,
+              color: context.appCustomTheme.primaryColor,
             ),
           ),
           Expanded(

@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: context.appTheme.canvasColor.withOpacity(0.8),
+              color: context.appCustomTheme.canvasColor.withOpacity(0.8),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                 const LoginForm(),
                 Gap(15.px),
                 RoundTextbutton(
-                  color: context.appTheme.canvasColor,
+                  color: context.appCustomTheme.canvasColor,
                   data: 'Login',
                   onTap: () {
                     context.read<LoginCubit>().emitLoginState();

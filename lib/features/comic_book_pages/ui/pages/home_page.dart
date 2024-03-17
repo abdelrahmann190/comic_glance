@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                   data: AppStrings.comicGlance,
                 ),
                 CircleAvatar(
-                  backgroundColor: context.appTheme.splashColor,
+                  backgroundColor: context.appCustomTheme.splashColor,
                   child: SvgPicture.asset(
                     'assets/icons/home_pressed_icon.svg',
                   ),

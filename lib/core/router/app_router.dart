@@ -84,7 +84,9 @@ class AuthenticatedRoute extends MaterialPageRoute {
   AuthenticatedRoute({required WidgetBuilder builder})
       : super(
           builder: (context) {
-            return false ? builder(context) : const LoginPage();
+            return AuthState().isSignedIn
+                ? builder(context)
+                : const LoginPage();
           },
         );
 }

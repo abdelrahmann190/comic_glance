@@ -10,17 +10,22 @@ extension Navigation on BuildContext {
         .pushReplacementNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName,
-      {Object? arguments, required RoutePredicate predicate}) {
-    return Navigator.of(this)
-        .pushNamedAndRemoveUntil(routeName, predicate, arguments: arguments);
+  Future<dynamic> pushNamedAndRemoveUntil(
+    String routeName, {
+    Object? arguments,
+  }) {
+    return Navigator.of(this).pushNamedAndRemoveUntil(
+      routeName,
+      (route) => false,
+      arguments: arguments,
+    );
   }
 
   void pop() => Navigator.of(this).pop();
 }
 
-extension AppTheme on BuildContext {
-  ThemeData get appTheme {
+extension AppCustomTheme on BuildContext {
+  ThemeData get appCustomTheme {
     return Theme.of(this);
   }
 }

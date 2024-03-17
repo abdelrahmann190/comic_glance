@@ -17,7 +17,7 @@ void main() async {
   runApp(
     ComicGlanceApp(
       getItInstance()..loadSavedThemeSettings(),
-      appRouter: AppRouter(await connectionChecker.isConnected),
+      appRouter: AppRouter(await connectionChecker.hasInternetAccess),
     ),
   );
 }

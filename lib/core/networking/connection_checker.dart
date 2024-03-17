@@ -4,6 +4,8 @@ class ConnectionChecker {
   final InternetConnection internetConnection;
   ConnectionChecker(this.internetConnection);
 
-  Future<bool> get isConnected async =>
-      await internetConnection.hasInternetAccess;
+  Future<bool> get hasInternetAccess async {
+    final internent = await internetConnection.internetStatus.asStream();
+    return internetConnection.hasInternetAccess;
+  }
 }

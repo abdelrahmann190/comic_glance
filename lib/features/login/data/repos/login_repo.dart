@@ -39,7 +39,14 @@ class LoginRepo {
     );
   }
 
-  Future<void> logout() async {
-    _appAuthServices.signOut();
+  Future<ApiResult> logout() async {
+    try {
+      _appAuthServices.signOut();
+      return const ApiResult.success('logged out');
+    } catch (error) {
+      return ApiResult.failure(
+        ErrorHandler.handle(error),
+      );
+    }
   }
 }

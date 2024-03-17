@@ -21,7 +21,7 @@ class ShowSettingsDialogButton extends StatelessWidget {
             Text(
               text,
               style: TextStyles.font15DynamicMedium.copyWith(
-                color: context.appTheme.primaryColor.withOpacity(0.6),
+                color: context.appCustomTheme.primaryColor.withOpacity(0.6),
               ),
             ),
             Gap(5.px),

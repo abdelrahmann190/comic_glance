@@ -33,7 +33,9 @@ class _ThemeModeSettingsCardState extends State<ThemeModeSettingsCard> {
         ShowSettingsDialogButton(
           text: currentThemeMode ?? '',
           onTap: () async {
-            await buildThemeDialog(context);
+            await buildThemeDialog(
+              context,
+            );
           },
         ),
       ],

@@ -15,6 +15,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: 100.h,
       child: Stack(
         children: [
           SafeArea(
@@ -52,7 +53,9 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 0,
+            bottom: 10.px,
+            right: 25.w,
+            left: 25.w,
             child: const LogoutButton(),
           ),
         ],

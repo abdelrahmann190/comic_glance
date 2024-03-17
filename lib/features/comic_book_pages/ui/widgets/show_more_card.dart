@@ -26,7 +26,7 @@ class ShowMoreCard<T> extends StatelessWidget {
         height: 230.px,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.px),
-          color: context.appTheme.primaryColor.withOpacity(0.1),
+          color: context.appCustomTheme.primaryColor.withOpacity(0.1),
         ),
         child: const Center(
           child: Text(

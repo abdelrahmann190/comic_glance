@@ -1,12 +1,16 @@
 import 'package:comic_glance/core/consts/app_strings.dart';
+import 'package:comic_glance/core/di/getit_di.dart';
 import 'package:comic_glance/core/helpers/extensions.dart';
 import 'package:comic_glance/core/theming/text_style.dart';
 import 'package:comic_glance/features/bottom_navigation/ui/widgets/custom_animated_bottom_nav_bar_icon.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_cubit.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/home_page.dart';
+import 'package:comic_glance/features/login/logic/cubit/login_cubit.dart';
 import 'package:comic_glance/features/settings/ui/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomNavigationBarMainPage extends StatefulWidget {
   const BottomNavigationBarMainPage({
@@ -23,10 +27,16 @@ class _BottomNavigationBarMainPageState
   int _selectedIndex = 0;
 
   final List<Widget> _scaffoldBodyWidgetsList = [
-    HomePage(),
+    BlocProvider(
+      create: (context) => getItInstance<ComicBooksCubit>(),
+      child: const HomePage(),
+    ),
     Container(),
     Container(),
-    const SettingsPage(),
+    BlocProvider(
+      create: (context) => getItInstance<LoginCubit>(),
+      child: const SettingsPage(),
+    ),
   ];
 
   @override
@@ -45,7 +55,7 @@ class _BottomNavigationBarMainPageState
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: context.appTheme.dividerColor,
+            color: context.appCustomTheme.dividerColor,
           ),
         ),
       ),
@@ -54,7 +64,7 @@ class _BottomNavigationBarMainPageState
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: false,
         selectedLabelStyle: TextStyles.font13DynamicMedium,
-        selectedItemColor: context.appTheme.primaryColor,
+        selectedItemColor: context.appCustomTheme.primaryColor,
         onTap: _onItemTapped,
         currentIndex: _selectedIndex,
         items: List.generate(

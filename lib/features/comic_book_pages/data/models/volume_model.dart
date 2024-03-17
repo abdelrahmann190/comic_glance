@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:comic_glance/features/comic_book_pages/data/models/image_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'volume_model.g.dart';
@@ -9,8 +10,10 @@ class VolumeModel {
   final List? countOfIssues;
   @JsonKey(name: 'first_issue')
   final Map? firstIssue;
-  @JsonKey(name: 'last_issue')
-  final Map? lastIssue;
+  @JsonKey(
+    name: 'last_issue',
+  )
+  final Map<String, dynamic>? lastIssue;
   @JsonKey(name: 'publisher')
   final Map? publisher;
 
@@ -31,8 +34,12 @@ class VolumeModel {
   final String? description;
   @JsonKey(name: 'id')
   final int? id;
-  @JsonKey(name: 'image')
-  final Map<String, dynamic>? imageMap;
+  @JsonKey(
+    name: 'image',
+    fromJson: ImageModel.fromJson,
+    toJson: ImageModel.toJson,
+  )
+  final ImageModel imageMap;
   @JsonKey(name: 'name')
   final String? name;
   @JsonKey(name: 'site_detail_url')
@@ -50,7 +57,7 @@ class VolumeModel {
     this.deck,
     this.description,
     this.id,
-    this.imageMap,
+    required this.imageMap,
     this.name,
     this.siteDetailUrl,
   });

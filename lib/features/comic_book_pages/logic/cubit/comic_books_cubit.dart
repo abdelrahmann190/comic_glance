@@ -13,54 +13,57 @@ class ComicBooksCubit extends Cubit<ComicBooksState> {
         );
 
   void getForYouIssuesList() async {
-    emit(const ComicBooksState.loading());
+    emit(const ComicBooksState.forYouIssuesListLoading());
     final result = await _comicBooksRepo.getIssuesList();
 
     result.when(
       success: (data) {
         emit(
-          ComicBooksState.success(data),
+          ComicBooksState.forYouIssuesListSuccess(data),
         );
       },
       failure: (error) {
         emit(
-          ComicBooksState.loadingError(error.apiErrorModel.message ?? ''),
+          ComicBooksState.forYouIssuesListError(
+              error.apiErrorModel.message ?? ''),
         );
       },
     );
   }
 
   void getMostRecentVolumesList() async {
-    emit(const ComicBooksState.loading());
+    emit(const ComicBooksState.mostRecentVolumesListLoading());
     final result = await _comicBooksRepo.getMostRecentVolumesList();
 
     result.when(
       success: (data) {
         emit(
-          ComicBooksState.success(data),
+          ComicBooksState.mostRecentVolumesListSuccess(data),
         );
       },
       failure: (error) {
         emit(
-          ComicBooksState.loadingError(error.apiErrorModel.message ?? ''),
+          ComicBooksState.mostRecentVolumesListError(
+              error.apiErrorModel.message ?? ''),
         );
       },
     );
   }
 
   void getPopularPublishersList() async {
-    emit(const ComicBooksState.loading());
+    emit(const ComicBooksState.popularPublishersListLoading());
     final result = await _comicBooksRepo.getPopularPublishersList();
 
     result.when(
       success: (data) {
         emit(
-          ComicBooksState.success(data),
+          ComicBooksState.popularPublishersListSuccess(data),
         );
       },
       failure: (error) {
         emit(
-          ComicBooksState.loadingError(error.apiErrorModel.message ?? ''),
+          ComicBooksState.popularPublishersListError(
+              error.apiErrorModel.message ?? ''),
         );
       },
     );

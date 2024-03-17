@@ -15,7 +15,7 @@ class BodyContentTextLight extends StatelessWidget {
     return Text(
       data,
       style: TextStyles.font13DynamicLight.copyWith(
-        color: context.appTheme.primaryColor.withOpacity(0.5),
+        color: context.appCustomTheme.primaryColor.withOpacity(0.5),
       ),
     );
   }

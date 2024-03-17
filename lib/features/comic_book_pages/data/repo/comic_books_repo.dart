@@ -74,7 +74,6 @@ class ComicBooksRepo {
         ),
       );
     } catch (error) {
-      print(error);
       return ApiResult.failure(
         ErrorHandler.handle(error),
       );

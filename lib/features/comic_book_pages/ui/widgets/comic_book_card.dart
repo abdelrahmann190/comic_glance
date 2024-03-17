@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_glance/core/helpers/date_time_helper.dart';
 import 'package:comic_glance/core/networking/api_constants.dart';
 import 'package:comic_glance/core/router/app_routes.dart';
@@ -29,33 +30,39 @@ class ComicBookCardState extends State<ComicBookCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTapCancel: () {
+        setState(() {
+          _isButtonsVisible = false;
+        });
+      },
       onTap: cardOnTapFunction,
       child: SizedBox(
         child: Stack(
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 160.px,
-                  height: 230.px,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.px),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        widget.data.imageModel.mediumUrl ?? '',
+                Stack(
+                  children: [
+                    SizedBox(
+                      width: 160.px,
+                      height: 230.px,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: CachedNetworkImage(
+                          imageUrl: widget.data.imageModel.thumbUrl ?? '',
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      colorFilter: _isButtonsVisible
-                          ? const ColorFilter.mode(
-                              Colors.black38,
-                              BlendMode.darken,
-                            )
-                          : null,
-                      fit: BoxFit.cover,
                     ),
-                  ),
-                  child: buildImageContainerChild(),
+                    Container(
+                      width: 160.px,
+                      height: _isButtonsVisible ? 230.px : 0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.px),
+                        color: Colors.black26,
+                      ),
+                    ),
+                  ],
                 ),
                 Gap(10.px),
                 SizedBox(
@@ -79,21 +86,6 @@ class ComicBookCardState extends State<ComicBookCard> {
         ),
       ),
     );
-  }
-
-  Widget buildImageContainerChild() {
-    return Container();
-    // return Row(
-    //   mainAxisAlignment: MainAxisAlignment.end,
-    //   crossAxisAlignment: CrossAxisAlignment.end,
-    //   children: List.generate(
-    //     widget.buttons.length,
-    //     (index) => _buildAnimatedButton(
-    //       index,
-    //       widget.buttons[index],
-    //     ),
-    //   ),
-    // );
   }
 
   void cardOnTapFunction() {

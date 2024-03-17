@@ -15,7 +15,7 @@ class ShowMorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: context.appTheme.scaffoldBackgroundColor,
+        backgroundColor: context.appCustomTheme.scaffoldBackgroundColor,
         title: const Text('Show All'),
         centerTitle: true,
       ),

@@ -9,8 +9,10 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ComicGlanceApp extends StatelessWidget {
   final ThemeController _themeController;
+  final AppRouter appRouter;
   const ComicGlanceApp(
     this._themeController, {
+    required this.appRouter,
     Key? key,
   }) : super(key: key);
 
@@ -26,7 +28,7 @@ class ComicGlanceApp extends StatelessWidget {
               darkTheme: AppTheme.dark(),
               themeMode: _themeController.themeMode,
               initialRoute: AppRoutes.mainNavigationPage,
-              onGenerateRoute: AppRouter.generateRoute,
+              onGenerateRoute: appRouter.generateRoute,
               debugShowCheckedModeBanner: false,
             );
           },

@@ -15,7 +15,7 @@ class RoundedBorderContainer extends StatelessWidget {
       padding: EdgeInsets.all(5.px),
       decoration: BoxDecoration(
         border: Border.all(
-          color: context.appTheme.splashColor,
+          color: context.appCustomTheme.splashColor,
         ),
         borderRadius: BorderRadius.circular(15),
       ),

@@ -1,7 +1,7 @@
 import 'package:comic_glance/core/helpers/enums.dart';
 import 'package:comic_glance/core/widgets/loading_widget.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_cubit.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_state.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_state.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/widgets/comic_book_card.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/widgets/show_more_card.dart';
 import 'package:flutter/material.dart';

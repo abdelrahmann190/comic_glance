@@ -23,10 +23,13 @@ class ApiConstants {
   static const String filterBatman = '&filter=name:batman';
   static const String apiNavLink = 'apiNavLink';
   static const String siteNavLink = 'siteNavLink';
+  static const String search = '/search/';
 
   static const String issueID = '4000';
   static const String volumeID = '4050';
   static const String publisherID = '4010';
+
+  static const List<String> searchResultsFilterList = [];
 }
 
 class ApiErrorMessages {

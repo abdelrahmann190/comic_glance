@@ -4,9 +4,9 @@ import 'package:comic_glance/core/networking/auth_state.dart';
 import 'package:comic_glance/core/networking/connection_checker.dart';
 import 'package:comic_glance/core/pages/no_internet_connection_page.dart';
 import 'package:comic_glance/core/router/app_routes.dart';
-import 'package:comic_glance/features/bottom_navigation/ui/pages/bottom_navigation_bar_main_page.dart';
+import 'package:comic_glance/features/bottom_navigation/ui/pages/main_navigation_page.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/issue_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/publisher_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/show_more_page.dart';
@@ -42,7 +42,7 @@ class AppRouter {
         );
       case AppRoutes.mainNavigationPage:
         return AuthenticatedRoute(
-          builder: (_) => const BottomNavigationBarMainPage(),
+          builder: (_) => const MainNavigationPage(),
         );
       case AppRoutes.issuePage:
       case AppRoutes.volumePage:

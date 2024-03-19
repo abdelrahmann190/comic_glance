@@ -40,4 +40,10 @@ abstract class ComicGlanceApiService {
   Future<ApiResponseModel> getDataFromCustomLink(
     @Path('customLink') String customLink,
   );
+
+  @GET(
+      '${ApiConstants.search}${ApiConstants.apiKey}${ApiConstants.jsonFormat}&query={searchQuery}')
+  Future<ApiResponseModel> getSearchResults(
+    @Path('searchQuery') String searchQuery,
+  );
 }

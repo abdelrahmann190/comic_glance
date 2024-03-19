@@ -86,4 +86,23 @@ class ComicBooksRepo {
     final results = _apiService.getDataFromCustomLink(customLink);
     return results;
   }
+
+  Future<ApiResult<List<CommonDataModel>>> getSearchResults(
+      String searchQuery) async {
+    try {
+      final apiResponse = await _apiService.getSearchResults(searchQuery);
+      final resultsList = apiResponse.results as List;
+      return ApiResult.success(
+        resultsList
+            .map(
+              (commonDataModel) => CommonDataModel.fromJson(commonDataModel),
+            )
+            .toList(),
+      );
+    } catch (error) {
+      return ApiResult.failure(
+        ErrorHandler.handle(error),
+      );
+    }
+  }
 }

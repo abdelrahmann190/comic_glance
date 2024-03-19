@@ -29,10 +29,19 @@ class LogoutButton extends StatelessWidget {
           BlocListener<LoginCubit, LoginState>(
             listener: (context, state) {
               state.whenOrNull(
+                loading: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                },
                 logoutSuccess: () {
                   context.pushNamedAndRemoveUntil(AppRoutes.loginPage);
                 },
                 error: (error) {
+                  context.pop();
                   showDialog(
                     context: context,
                     builder: (context) => CustomErrorDialog(

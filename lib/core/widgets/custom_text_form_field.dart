@@ -10,6 +10,8 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?) validator;
   final bool? obsecureText;
   final Widget? suffixIcon;
+  final void Function(String)? onFieldSubmitted;
+  final bool addClearButton;
   const CustomTextFormField({
     super.key,
     required this.hintText,
@@ -19,18 +21,21 @@ class CustomTextFormField extends StatelessWidget {
     required this.validator,
     this.obsecureText,
     this.suffixIcon,
+    this.onFieldSubmitted,
+    this.addClearButton = false,
   });
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(vertical: 5.px),
       decoration: BoxDecoration(
         color: context.appCustomTheme.primaryColor.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(25.px),
+        borderRadius: BorderRadius.circular(50.px),
       ),
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.symmetric(horizontal: 15.px),
             child: Icon(
               icon,
               color: context.appCustomTheme.primaryColor,
@@ -39,6 +44,7 @@ class CustomTextFormField extends StatelessWidget {
           Expanded(
             child: TextFormField(
               controller: controller,
+              onFieldSubmitted: onFieldSubmitted,
               validator: validator,
               obscureText: obsecureText ?? false,
               decoration: InputDecoration(
@@ -47,11 +53,22 @@ class CustomTextFormField extends StatelessWidget {
                 suffixIcon: suffixIcon,
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 10.px,
-                  vertical: 15.px,
+                  vertical: 10.px,
+                ),
+                errorMaxLines: 2,
+                errorStyle: TextStyle(
+                  fontSize: 10.px,
                 ),
               ),
             ),
           ),
+          if (addClearButton)
+            IconButton(
+              onPressed: () {
+                controller.clear();
+              },
+              icon: const Icon(Icons.clear),
+            )
         ],
       ),
     );

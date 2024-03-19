@@ -1,3 +1,4 @@
+import 'package:comic_glance/core/helpers/app_regex.dart';
 import 'package:comic_glance/core/widgets/custom_text_form_field.dart';
 import 'package:comic_glance/features/login/logic/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,9 @@ class _LoginFormState extends State<LoginForm> {
             controller: context.read<LoginCubit>().emailController,
             isPasswordField: false,
             validator: (value) {
-              if (value == null || value.isEmpty) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !AppRegex.isEmailValid(value)) {
                 return 'please enter a valid email';
               }
               return null;
@@ -45,11 +48,17 @@ class _LoginFormState extends State<LoginForm> {
                 });
               },
               child: Icon(
-                isObscureText ? Icons.visibility_off : Icons.visibility,
+                isObscureText ? Icons.visibility : Icons.visibility_off,
               ),
             ),
-            validator: (p0) {
-              return 'please enter';
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter a valid password';
+              }
+              if (value.length < 8) {
+                return 'password should be 8 characters or more';
+              }
+              return null;
             },
             obsecureText: isObscureText,
           ),

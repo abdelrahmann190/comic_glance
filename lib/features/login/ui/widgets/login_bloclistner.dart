@@ -12,8 +12,6 @@ class LoginBlocListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
-      // listenWhen: (previous, current) =>
-      //     current is Loading || current is LoginSuccess || current is Error,
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
@@ -39,6 +37,7 @@ class LoginBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
+    context.pop();
     showDialog(
       context: context,
       builder: (context) => CustomErrorDialog(error: error),

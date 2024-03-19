@@ -4,7 +4,7 @@ import 'package:comic_glance/core/helpers/enums.dart';
 import 'package:comic_glance/core/helpers/extensions.dart';
 import 'package:comic_glance/core/theming/theme_controller.dart';
 import 'package:comic_glance/core/widgets/body_header_text_bold.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
 import 'package:comic_glance/core/widgets/main_page_header_text.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/widgets/comic_books_list.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,7 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:comic_glance/features/comic_book_pages/data/repo/comic_books_repo.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_state.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_state.dart';
 
 class ComicBooksCubit extends Cubit<ComicBooksState> {
   final ComicBooksRepo _comicBooksRepo;

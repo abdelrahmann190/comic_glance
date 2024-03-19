@@ -20,7 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
   final formKey = GlobalKey<FormState>();
 
   void emitLoginState() async {
-    const LoginState.loading();
+    emit(const LoginState.loading());
 
     final response = await _loginRepo.login(
       loginRequestBody: LoginRequestBody(
@@ -46,6 +46,8 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   void logOut() async {
+    emit(const LoginState.loading());
+
     final response = await _loginRepo.logout();
     response.when(
       success: (data) {

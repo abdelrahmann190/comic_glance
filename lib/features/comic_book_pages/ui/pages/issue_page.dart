@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:comic_glance/features/comic_book_pages/data/models/issue_model.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_cubit.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_state.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_state.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class IssuePage extends StatefulWidget {

@@ -42,8 +42,9 @@ abstract class ComicGlanceApiService {
   );
 
   @GET(
-      '${ApiConstants.search}${ApiConstants.apiKey}${ApiConstants.jsonFormat}&query={searchQuery}')
+      '${ApiConstants.search}${ApiConstants.apiKey}${ApiConstants.jsonFormat}&query={searchQuery}&resources={searchFilters}')
   Future<ApiResponseModel> getSearchResults(
     @Path('searchQuery') String searchQuery,
+    @Path('searchFilters') String searchFilters,
   );
 }

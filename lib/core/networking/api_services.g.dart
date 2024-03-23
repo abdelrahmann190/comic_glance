@@ -129,7 +129,10 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
   }
 
   @override
-  Future<ApiResponseModel> getSearchResults(String searchQuery) async {
+  Future<ApiResponseModel> getSearchResults(
+    String searchQuery,
+    String searchFilters,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -142,7 +145,7 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
     )
             .compose(
               _dio.options,
-              '/search/?api_key=c04dc84242228c6db4bf419f94ea92fc07026a9f&format=json&query=${searchQuery}',
+              '/search/?api_key=c04dc84242228c6db4bf419f94ea92fc07026a9f&format=json&query=${searchQuery}&resources=${searchFilters}',
               queryParameters: queryParameters,
               data: _data,
             )

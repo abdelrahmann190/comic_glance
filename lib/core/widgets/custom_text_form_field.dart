@@ -7,7 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconData icon;
   final TextEditingController controller;
   final bool isPasswordField;
-  final String? Function(String?) validator;
+  final String? Function(String?)? validator;
   final bool? obsecureText;
   final Widget? suffixIcon;
   final void Function(String)? onFieldSubmitted;
@@ -18,7 +18,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.icon,
     required this.controller,
     required this.isPasswordField,
-    required this.validator,
+    this.validator,
     this.obsecureText,
     this.suffixIcon,
     this.onFieldSubmitted,

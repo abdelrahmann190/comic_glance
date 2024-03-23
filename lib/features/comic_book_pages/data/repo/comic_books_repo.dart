@@ -88,9 +88,14 @@ class ComicBooksRepo {
   }
 
   Future<ApiResult<List<CommonDataModel>>> getSearchResults(
-      String searchQuery) async {
+    String searchQuery,
+    String searchFilters,
+  ) async {
     try {
-      final apiResponse = await _apiService.getSearchResults(searchQuery);
+      final apiResponse = await _apiService.getSearchResults(
+        searchQuery,
+        searchFilters,
+      );
       final resultsList = apiResponse.results as List;
       return ApiResult.success(
         resultsList

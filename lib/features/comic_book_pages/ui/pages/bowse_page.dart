@@ -2,6 +2,7 @@ import 'package:comic_glance/core/widgets/custom_text_form_field.dart';
 import 'package:comic_glance/core/widgets/main_page_header_text.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/browse_cubit/browse_cubit.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/widgets/browse_page_content.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/widgets/browse_results_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -41,20 +42,15 @@ class _BrowsePageState extends State<BrowsePage> {
                   context.read<BrowseCubit>().emitSearchResult();
                 }
               },
-              validator: (value) {
-                return null;
-              },
             ),
+            BrowseResultsFilter(),
             Gap(15.px),
-            const Expanded(child: BrowsePageContent()),
+            const Expanded(
+              child: BrowsePageContent(),
+            ),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 }

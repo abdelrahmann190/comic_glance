@@ -17,6 +17,22 @@ class AppStrings {
     'Settings',
   ];
 
+  static const List<String> browseFilters = [
+    'All',
+    'character',
+    'concept',
+    'origin',
+    'object',
+    'location',
+    'issue',
+    'story_arc',
+    'volume',
+    'publisher',
+    'person',
+    'team',
+    'video',
+  ];
+
   static const List<String> bottomNavBarPressedIconsSVGAssets = [
     'assets/icons/home_pressed_icon.svg',
     'assets/icons/browse_pressed_icon.svg',

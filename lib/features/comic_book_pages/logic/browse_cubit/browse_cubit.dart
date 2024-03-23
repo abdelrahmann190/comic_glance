@@ -7,13 +7,15 @@ class BrowseCubit extends Cubit<BrowseState> {
   BrowseCubit(this._comicBooksRepo) : super(const BrowseState.initial());
 
   final ComicBooksRepo _comicBooksRepo;
-
+  List<String> searchFilters = [''];
   final searchController = TextEditingController();
 
   void emitSearchResult() async {
     emit(const BrowseState.loading());
-    final result =
-        await _comicBooksRepo.getSearchResults(searchController.text);
+    final result = await _comicBooksRepo.getSearchResults(
+      searchController.text,
+      searchFilters.join(','),
+    );
     result.when(
       success: (data) {
         emit(

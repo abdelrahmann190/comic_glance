@@ -1,4 +1,5 @@
 import 'package:comic_glance/core/helpers/app_shared_preferences.dart';
+import 'package:comic_glance/core/local_data_base/local_database_services.dart';
 import 'package:comic_glance/core/networking/api_services.dart';
 import 'package:comic_glance/core/networking/app_auth_services.dart';
 import 'package:comic_glance/core/networking/connection_checker.dart';
@@ -6,8 +7,10 @@ import 'package:comic_glance/core/networking/dio_factory.dart';
 import 'package:comic_glance/core/theming/theme_controller.dart';
 import 'package:comic_glance/core/theming/theme_service.dart';
 import 'package:comic_glance/features/comic_book_pages/data/repo/comic_books_repo.dart';
+import 'package:comic_glance/features/comic_book_pages/data/repo/my_library_repo.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/browse_cubit/browse_cubit.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/my_library_cubit/my_library_cubit.dart';
 import 'package:comic_glance/features/login/data/repos/login_repo.dart';
 import 'package:comic_glance/features/login/logic/cubit/login_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -80,6 +83,25 @@ class GetitDI {
     /// Browse cubit
     getItInstance.registerFactory(
       () => BrowseCubit(
+        getItInstance(),
+      ),
+    );
+
+    /// Local database services
+    getItInstance.registerFactory(
+      () => LocalDatabaseServices(),
+    );
+
+    /// My Library repo
+    getItInstance.registerFactory(
+      () => MyLibraryRepo(
+        getItInstance(),
+      ),
+    );
+
+    /// My Library cubit
+    getItInstance.registerFactory(
+      () => MyLibraryCubit(
         getItInstance(),
       ),
     );

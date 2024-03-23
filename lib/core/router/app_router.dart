@@ -7,6 +7,7 @@ import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/features/bottom_navigation/ui/pages/main_navigation_page.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/my_library_cubit/my_library_cubit.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/issue_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/publisher_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/show_more_page.dart';
@@ -42,7 +43,10 @@ class AppRouter {
         );
       case AppRoutes.mainNavigationPage:
         return AuthenticatedRoute(
-          builder: (_) => const MainNavigationPage(),
+          builder: (_) => BlocProvider(
+            create: (context) => getItInstance<MyLibraryCubit>(),
+            child: const MainNavigationPage(),
+          ),
         );
       case AppRoutes.issuePage:
       case AppRoutes.volumePage:

@@ -4,7 +4,7 @@ class AppStrings {
   static const String systemThemeMode = 'system';
   static const String lightThemeMode = 'light';
   static const String darkThemeMode = 'dark';
-
+  static const String favorites = 'favorites';
   static const List<String> themeModesList = [
     systemThemeMode,
     lightThemeMode,

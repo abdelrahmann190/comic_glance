@@ -7,6 +7,7 @@ import 'package:comic_glance/features/comic_book_pages/logic/browse_cubit/browse
 import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/bowse_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/home_page.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/pages/my_library_page.dart';
 import 'package:comic_glance/features/login/logic/cubit/login_cubit.dart';
 import 'package:comic_glance/features/settings/ui/pages/settings_page.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
       create: (context) => getItInstance<BrowseCubit>(),
       child: const BrowsePage(),
     ),
-    Container(),
+    const MyLibraryPage(),
     BlocProvider(
       create: (context) => getItInstance<LoginCubit>(),
       child: const SettingsPage(),

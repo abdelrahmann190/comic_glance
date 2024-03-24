@@ -32,15 +32,8 @@ class MyLibraryCubit extends Cubit<MyLibraryState> {
     result.when(
       success: (data) {
         getFavoritesList();
-        emit(
-          const MyLibraryState.itemAdded(true),
-        );
       },
-      failure: (error) {
-        emit(
-          const MyLibraryState.itemAdded(false),
-        );
-      },
+      failure: (error) {},
     );
   }
 
@@ -50,11 +43,7 @@ class MyLibraryCubit extends Cubit<MyLibraryState> {
       success: (data) {
         getFavoritesList();
       },
-      failure: (error) {
-        emit(
-          const MyLibraryState.itemAdded(false),
-        );
-      },
+      failure: (error) {},
     );
   }
 

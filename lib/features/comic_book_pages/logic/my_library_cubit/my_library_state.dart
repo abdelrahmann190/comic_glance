@@ -8,5 +8,4 @@ class MyLibraryState<T> with _$MyLibraryState {
   const factory MyLibraryState.loading() = Loading;
   const factory MyLibraryState.loadingSuccess(T data) = LoadingSuccess;
   const factory MyLibraryState.loadingError(String error) = LoadingError;
-  const factory MyLibraryState.itemAdded(bool isItemAdded) = ItemAdded;
 }

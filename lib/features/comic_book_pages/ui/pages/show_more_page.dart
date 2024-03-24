@@ -19,7 +19,10 @@ class ShowMorePage extends StatelessWidget {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: ComicBooksGridView(data: data),
+        child: ComicBooksGridView(
+          data: data,
+          key: key,
+        ),
       ),
     );
   }

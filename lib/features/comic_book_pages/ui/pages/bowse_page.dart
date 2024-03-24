@@ -43,6 +43,7 @@ class _BrowsePageState extends State<BrowsePage> {
                 }
               },
             ),
+            Gap(5.px),
             const BrowseResultsFilter(),
             Gap(15.px),
             const Expanded(

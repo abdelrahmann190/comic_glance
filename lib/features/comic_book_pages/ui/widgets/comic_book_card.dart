@@ -116,6 +116,7 @@ class ComicBookCardState extends State<ComicBookCard> {
       setState(
         () {
           _isButtonsVisible = !_isButtonsVisible;
+          _isItemAdded = checkIfItemIsAdded();
         },
       );
     }

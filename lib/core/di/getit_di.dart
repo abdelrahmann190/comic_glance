@@ -100,7 +100,7 @@ class GetitDI {
     );
 
     /// My Library cubit
-    getItInstance.registerFactory(
+    getItInstance.registerLazySingleton(
       () => MyLibraryCubit(
         getItInstance(),
       ),

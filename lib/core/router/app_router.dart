@@ -60,8 +60,11 @@ class AppRouter {
         );
       case AppRoutes.showMorePage:
         return AuthenticatedRoute(
-          builder: (_) => ShowMorePage(
-            data: settings.arguments as List<CommonDataModel>,
+          builder: (_) => BlocProvider(
+            create: (context) => getItInstance<MyLibraryCubit>(),
+            child: ShowMorePage(
+              data: settings.arguments as List<CommonDataModel>,
+            ),
           ),
         );
       default:

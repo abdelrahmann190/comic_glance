@@ -4,6 +4,7 @@ import 'package:comic_glance/core/networking/api_services.dart';
 import 'package:comic_glance/core/networking/app_auth_services.dart';
 import 'package:comic_glance/core/networking/connection_checker.dart';
 import 'package:comic_glance/core/networking/dio_factory.dart';
+import 'package:comic_glance/core/networking/website_images_service.dart';
 import 'package:comic_glance/core/theming/theme_controller.dart';
 import 'package:comic_glance/core/theming/theme_service.dart';
 import 'package:comic_glance/features/comic_book_pages/data/repo/comic_books_repo.dart';
@@ -62,6 +63,13 @@ class GetitDI {
     /// Api Service
     getItInstance.registerLazySingleton(
       () => ComicGlanceApiService(
+        DioFactory.getDio(),
+      ),
+    );
+
+    /// Website images service
+    getItInstance.registerLazySingleton(
+      () => WebsiteImagesService(
         DioFactory.getDio(),
       ),
     );

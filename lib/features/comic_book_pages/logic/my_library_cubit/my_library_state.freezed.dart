@@ -22,7 +22,6 @@ mixin _$MyLibraryState<T> {
     required TResult Function() loading,
     required TResult Function(T data) loadingSuccess,
     required TResult Function(String error) loadingError,
-    required TResult Function(bool isItemAdded) itemAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +30,6 @@ mixin _$MyLibraryState<T> {
     TResult? Function()? loading,
     TResult? Function(T data)? loadingSuccess,
     TResult? Function(String error)? loadingError,
-    TResult? Function(bool isItemAdded)? itemAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +38,6 @@ mixin _$MyLibraryState<T> {
     TResult Function()? loading,
     TResult Function(T data)? loadingSuccess,
     TResult Function(String error)? loadingError,
-    TResult Function(bool isItemAdded)? itemAdded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,7 +47,6 @@ mixin _$MyLibraryState<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(LoadingSuccess<T> value) loadingSuccess,
     required TResult Function(LoadingError<T> value) loadingError,
-    required TResult Function(ItemAdded<T> value) itemAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,7 +55,6 @@ mixin _$MyLibraryState<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult? Function(LoadingError<T> value)? loadingError,
-    TResult? Function(ItemAdded<T> value)? itemAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,7 +63,6 @@ mixin _$MyLibraryState<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult Function(LoadingError<T> value)? loadingError,
-    TResult Function(ItemAdded<T> value)? itemAdded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,7 +128,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function() loading,
     required TResult Function(T data) loadingSuccess,
     required TResult Function(String error) loadingError,
-    required TResult Function(bool isItemAdded) itemAdded,
   }) {
     return initial();
   }
@@ -146,7 +139,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function()? loading,
     TResult? Function(T data)? loadingSuccess,
     TResult? Function(String error)? loadingError,
-    TResult? Function(bool isItemAdded)? itemAdded,
   }) {
     return initial?.call();
   }
@@ -158,7 +150,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function()? loading,
     TResult Function(T data)? loadingSuccess,
     TResult Function(String error)? loadingError,
-    TResult Function(bool isItemAdded)? itemAdded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -174,7 +165,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(LoadingSuccess<T> value) loadingSuccess,
     required TResult Function(LoadingError<T> value) loadingError,
-    required TResult Function(ItemAdded<T> value) itemAdded,
   }) {
     return initial(this);
   }
@@ -186,7 +176,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult? Function(LoadingError<T> value)? loadingError,
-    TResult? Function(ItemAdded<T> value)? itemAdded,
   }) {
     return initial?.call(this);
   }
@@ -198,7 +187,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult Function(LoadingError<T> value)? loadingError,
-    TResult Function(ItemAdded<T> value)? itemAdded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -254,7 +242,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function() loading,
     required TResult Function(T data) loadingSuccess,
     required TResult Function(String error) loadingError,
-    required TResult Function(bool isItemAdded) itemAdded,
   }) {
     return loading();
   }
@@ -266,7 +253,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function()? loading,
     TResult? Function(T data)? loadingSuccess,
     TResult? Function(String error)? loadingError,
-    TResult? Function(bool isItemAdded)? itemAdded,
   }) {
     return loading?.call();
   }
@@ -278,7 +264,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function()? loading,
     TResult Function(T data)? loadingSuccess,
     TResult Function(String error)? loadingError,
-    TResult Function(bool isItemAdded)? itemAdded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -294,7 +279,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(LoadingSuccess<T> value) loadingSuccess,
     required TResult Function(LoadingError<T> value) loadingError,
-    required TResult Function(ItemAdded<T> value) itemAdded,
   }) {
     return loading(this);
   }
@@ -306,7 +290,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult? Function(LoadingError<T> value)? loadingError,
-    TResult? Function(ItemAdded<T> value)? itemAdded,
   }) {
     return loading?.call(this);
   }
@@ -318,7 +301,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult Function(LoadingError<T> value)? loadingError,
-    TResult Function(ItemAdded<T> value)? itemAdded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -402,7 +384,6 @@ class _$LoadingSuccessImpl<T> implements LoadingSuccess<T> {
     required TResult Function() loading,
     required TResult Function(T data) loadingSuccess,
     required TResult Function(String error) loadingError,
-    required TResult Function(bool isItemAdded) itemAdded,
   }) {
     return loadingSuccess(data);
   }
@@ -414,7 +395,6 @@ class _$LoadingSuccessImpl<T> implements LoadingSuccess<T> {
     TResult? Function()? loading,
     TResult? Function(T data)? loadingSuccess,
     TResult? Function(String error)? loadingError,
-    TResult? Function(bool isItemAdded)? itemAdded,
   }) {
     return loadingSuccess?.call(data);
   }
@@ -426,7 +406,6 @@ class _$LoadingSuccessImpl<T> implements LoadingSuccess<T> {
     TResult Function()? loading,
     TResult Function(T data)? loadingSuccess,
     TResult Function(String error)? loadingError,
-    TResult Function(bool isItemAdded)? itemAdded,
     required TResult orElse(),
   }) {
     if (loadingSuccess != null) {
@@ -442,7 +421,6 @@ class _$LoadingSuccessImpl<T> implements LoadingSuccess<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(LoadingSuccess<T> value) loadingSuccess,
     required TResult Function(LoadingError<T> value) loadingError,
-    required TResult Function(ItemAdded<T> value) itemAdded,
   }) {
     return loadingSuccess(this);
   }
@@ -454,7 +432,6 @@ class _$LoadingSuccessImpl<T> implements LoadingSuccess<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult? Function(LoadingError<T> value)? loadingError,
-    TResult? Function(ItemAdded<T> value)? itemAdded,
   }) {
     return loadingSuccess?.call(this);
   }
@@ -466,7 +443,6 @@ class _$LoadingSuccessImpl<T> implements LoadingSuccess<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult Function(LoadingError<T> value)? loadingError,
-    TResult Function(ItemAdded<T> value)? itemAdded,
     required TResult orElse(),
   }) {
     if (loadingSuccess != null) {
@@ -554,7 +530,6 @@ class _$LoadingErrorImpl<T> implements LoadingError<T> {
     required TResult Function() loading,
     required TResult Function(T data) loadingSuccess,
     required TResult Function(String error) loadingError,
-    required TResult Function(bool isItemAdded) itemAdded,
   }) {
     return loadingError(error);
   }
@@ -566,7 +541,6 @@ class _$LoadingErrorImpl<T> implements LoadingError<T> {
     TResult? Function()? loading,
     TResult? Function(T data)? loadingSuccess,
     TResult? Function(String error)? loadingError,
-    TResult? Function(bool isItemAdded)? itemAdded,
   }) {
     return loadingError?.call(error);
   }
@@ -578,7 +552,6 @@ class _$LoadingErrorImpl<T> implements LoadingError<T> {
     TResult Function()? loading,
     TResult Function(T data)? loadingSuccess,
     TResult Function(String error)? loadingError,
-    TResult Function(bool isItemAdded)? itemAdded,
     required TResult orElse(),
   }) {
     if (loadingError != null) {
@@ -594,7 +567,6 @@ class _$LoadingErrorImpl<T> implements LoadingError<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(LoadingSuccess<T> value) loadingSuccess,
     required TResult Function(LoadingError<T> value) loadingError,
-    required TResult Function(ItemAdded<T> value) itemAdded,
   }) {
     return loadingError(this);
   }
@@ -606,7 +578,6 @@ class _$LoadingErrorImpl<T> implements LoadingError<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult? Function(LoadingError<T> value)? loadingError,
-    TResult? Function(ItemAdded<T> value)? itemAdded,
   }) {
     return loadingError?.call(this);
   }
@@ -618,7 +589,6 @@ class _$LoadingErrorImpl<T> implements LoadingError<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(LoadingSuccess<T> value)? loadingSuccess,
     TResult Function(LoadingError<T> value)? loadingError,
-    TResult Function(ItemAdded<T> value)? itemAdded,
     required TResult orElse(),
   }) {
     if (loadingError != null) {
@@ -634,157 +604,5 @@ abstract class LoadingError<T> implements MyLibraryState<T> {
   String get error;
   @JsonKey(ignore: true)
   _$$LoadingErrorImplCopyWith<T, _$LoadingErrorImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ItemAddedImplCopyWith<T, $Res> {
-  factory _$$ItemAddedImplCopyWith(
-          _$ItemAddedImpl<T> value, $Res Function(_$ItemAddedImpl<T>) then) =
-      __$$ItemAddedImplCopyWithImpl<T, $Res>;
-  @useResult
-  $Res call({bool isItemAdded});
-}
-
-/// @nodoc
-class __$$ItemAddedImplCopyWithImpl<T, $Res>
-    extends _$MyLibraryStateCopyWithImpl<T, $Res, _$ItemAddedImpl<T>>
-    implements _$$ItemAddedImplCopyWith<T, $Res> {
-  __$$ItemAddedImplCopyWithImpl(
-      _$ItemAddedImpl<T> _value, $Res Function(_$ItemAddedImpl<T>) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isItemAdded = null,
-  }) {
-    return _then(_$ItemAddedImpl<T>(
-      null == isItemAdded
-          ? _value.isItemAdded
-          : isItemAdded // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ItemAddedImpl<T> implements ItemAdded<T> {
-  const _$ItemAddedImpl(this.isItemAdded);
-
-  @override
-  final bool isItemAdded;
-
-  @override
-  String toString() {
-    return 'MyLibraryState<$T>.itemAdded(isItemAdded: $isItemAdded)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ItemAddedImpl<T> &&
-            (identical(other.isItemAdded, isItemAdded) ||
-                other.isItemAdded == isItemAdded));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, isItemAdded);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ItemAddedImplCopyWith<T, _$ItemAddedImpl<T>> get copyWith =>
-      __$$ItemAddedImplCopyWithImpl<T, _$ItemAddedImpl<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(T data) loadingSuccess,
-    required TResult Function(String error) loadingError,
-    required TResult Function(bool isItemAdded) itemAdded,
-  }) {
-    return itemAdded(isItemAdded);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(T data)? loadingSuccess,
-    TResult? Function(String error)? loadingError,
-    TResult? Function(bool isItemAdded)? itemAdded,
-  }) {
-    return itemAdded?.call(isItemAdded);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(T data)? loadingSuccess,
-    TResult Function(String error)? loadingError,
-    TResult Function(bool isItemAdded)? itemAdded,
-    required TResult orElse(),
-  }) {
-    if (itemAdded != null) {
-      return itemAdded(isItemAdded);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(Loading<T> value) loading,
-    required TResult Function(LoadingSuccess<T> value) loadingSuccess,
-    required TResult Function(LoadingError<T> value) loadingError,
-    required TResult Function(ItemAdded<T> value) itemAdded,
-  }) {
-    return itemAdded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(Loading<T> value)? loading,
-    TResult? Function(LoadingSuccess<T> value)? loadingSuccess,
-    TResult? Function(LoadingError<T> value)? loadingError,
-    TResult? Function(ItemAdded<T> value)? itemAdded,
-  }) {
-    return itemAdded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(Loading<T> value)? loading,
-    TResult Function(LoadingSuccess<T> value)? loadingSuccess,
-    TResult Function(LoadingError<T> value)? loadingError,
-    TResult Function(ItemAdded<T> value)? itemAdded,
-    required TResult orElse(),
-  }) {
-    if (itemAdded != null) {
-      return itemAdded(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ItemAdded<T> implements MyLibraryState<T> {
-  const factory ItemAdded(final bool isItemAdded) = _$ItemAddedImpl<T>;
-
-  bool get isItemAdded;
-  @JsonKey(ignore: true)
-  _$$ItemAddedImplCopyWith<T, _$ItemAddedImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

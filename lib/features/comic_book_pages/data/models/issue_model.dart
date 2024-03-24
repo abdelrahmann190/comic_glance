@@ -1,3 +1,4 @@
+import 'package:comic_glance/features/comic_book_pages/data/models/credits_model.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/image_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'issue_model.g.dart';
@@ -47,7 +48,7 @@ class IssueModel {
   @JsonKey(name: 'teams_disbanded_in')
   final List? teamsDisbandedIn;
   @JsonKey(name: 'volume')
-  final Map? volume;
+  final Map<String, dynamic>? volume;
   @JsonKey(name: 'aliases')
   final String? aliases;
   @JsonKey(name: 'api_detail_url')
@@ -72,6 +73,19 @@ class IssueModel {
   final String? name;
   @JsonKey(name: 'site_detail_url')
   final String? siteDetailUrl;
+
+  /// Mapped objects
+  final CreditsModel? volumeMapped;
+  final List<CreditsModel>? characterCreditsMapped;
+  final List<CreditsModel>? charactersDiedInMapped;
+  final List<CreditsModel>? conceptCreditsMapped;
+  final List<CreditsModel>? locationCreditsMapped;
+  final List<CreditsModel>? objectCreditsMapped;
+  final List<CreditsModel>? personCreditsMapped;
+  final List<CreditsModel>? storyArcCreditsMapped;
+
+  final List<CreditsModel>? teamCreditsMapped;
+  final List<CreditsModel>? teamsDisbandedInMapped;
   IssueModel({
     this.characterCredits,
     this.charactersDiedIn,
@@ -103,7 +117,57 @@ class IssueModel {
     required this.imageModel,
     this.name,
     this.siteDetailUrl,
+    this.volumeMapped,
+    this.teamsDisbandedInMapped,
+    this.teamCreditsMapped,
+    this.storyArcCreditsMapped,
+    this.personCreditsMapped,
+    this.objectCreditsMapped,
+    this.locationCreditsMapped,
+    this.conceptCreditsMapped,
+    this.charactersDiedInMapped,
+    this.characterCreditsMapped,
   });
+
+  IssueModel mappedIssueModel() {
+    return IssueModel(
+      characterCreditsMapped:
+          CreditsModel.getListOfCreditsModel(characterCredits),
+      charactersDiedInMapped:
+          CreditsModel.getListOfCreditsModel(charactersDiedIn),
+      conceptCreditsMapped: CreditsModel.getListOfCreditsModel(conceptCredits),
+      coverDate: coverDate,
+      disbandedTeams: disbandedTeams,
+      firstApperanceCharacters: firstApperanceCharacters,
+      firstApperanceConcepts: firstApperanceConcepts,
+      firstApperanceLocations: firstApperanceLocations,
+      firstApperanceObjects: firstApperanceObjects,
+      firstApperanceStoryArcs: firstApperanceStoryArcs,
+      firstApperanceTeams: firstApperanceTeams,
+      issueNumber: issueNumber,
+      locationCreditsMapped:
+          CreditsModel.getListOfCreditsModel(locationCredits),
+      objectCreditsMapped: CreditsModel.getListOfCreditsModel(objectCredits),
+      personCreditsMapped: CreditsModel.getListOfCreditsModel(personCredits),
+      storeDate: storeDate,
+      storyArcCreditsMapped:
+          CreditsModel.getListOfCreditsModel(storyArcCredits),
+      teamCreditsMapped: CreditsModel.getListOfCreditsModel(teamCredits),
+      teamsDisbandedInMapped:
+          CreditsModel.getListOfCreditsModel(teamsDisbandedIn),
+      volumeMapped: CreditsModel.fromJson(volume ?? {}),
+      aliases: aliases,
+      apiDetailUrl: apiDetailUrl,
+      dateAdded: dateAdded,
+      dateLastUpdated: dateLastUpdated,
+      deck: deck,
+      description: description,
+      id: id,
+      name: name,
+      siteDetailUrl: siteDetailUrl,
+      imageModel: imageModel,
+    );
+  }
 
   factory IssueModel.fromJson(Map<String, dynamic> json) {
     return _$IssueModelFromJson(json);

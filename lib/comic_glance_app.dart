@@ -1,10 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:comic_glance/core/di/getit_di.dart';
 import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/core/theming/app_theme.dart';
 import 'package:comic_glance/core/theming/theme_controller.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/my_library_cubit/my_library_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:comic_glance/core/router/app_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ComicGlanceApp extends StatelessWidget {
@@ -23,13 +26,16 @@ class ComicGlanceApp extends StatelessWidget {
         return ListenableBuilder(
           listenable: _themeController,
           builder: (BuildContext context, Widget? child) {
-            return MaterialApp(
-              theme: AppTheme.light(),
-              darkTheme: AppTheme.dark(),
-              themeMode: _themeController.themeMode,
-              initialRoute: AppRoutes.mainNavigationPage,
-              onGenerateRoute: appRouter.generateRoute,
-              debugShowCheckedModeBanner: false,
+            return BlocProvider(
+              create: (context) => getItInstance<MyLibraryCubit>(),
+              child: MaterialApp(
+                theme: AppTheme.light(),
+                darkTheme: AppTheme.dark(),
+                themeMode: _themeController.themeMode,
+                initialRoute: AppRoutes.mainNavigationPage,
+                onGenerateRoute: appRouter.generateRoute,
+                debugShowCheckedModeBanner: false,
+              ),
             );
           },
         );

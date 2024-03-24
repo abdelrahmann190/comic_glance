@@ -43,10 +43,7 @@ class AppRouter {
         );
       case AppRoutes.mainNavigationPage:
         return AuthenticatedRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getItInstance<MyLibraryCubit>(),
-            child: const MainNavigationPage(),
-          ),
+          builder: (_) => const MainNavigationPage(),
         );
       case AppRoutes.issuePage:
       case AppRoutes.volumePage:
@@ -60,11 +57,8 @@ class AppRouter {
         );
       case AppRoutes.showMorePage:
         return AuthenticatedRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getItInstance<MyLibraryCubit>(),
-            child: ShowMorePage(
-              data: settings.arguments as List<CommonDataModel>,
-            ),
+          builder: (_) => ShowMorePage(
+            data: settings.arguments as List<CommonDataModel>,
           ),
         );
       default:

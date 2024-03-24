@@ -68,12 +68,14 @@ class ComicBooksRepo {
     try {
       final apiResponse = await _getDataFromCustomLink(customLink);
       final resultMap = apiResponse.results as Map<String, dynamic>;
+
       return ApiResult.success(
         IssueModel.fromJson(
           resultMap,
-        ),
+        ).mappedIssueModel(),
       );
     } catch (error) {
+      print(error);
       return ApiResult.failure(
         ErrorHandler.handle(error),
       );

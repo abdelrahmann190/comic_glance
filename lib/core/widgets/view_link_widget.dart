@@ -14,6 +14,8 @@ class ViewLinkWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WebViewWidget(controller: controller);
+    return WebViewWidget(
+      controller: controller,
+    );
   }
 }

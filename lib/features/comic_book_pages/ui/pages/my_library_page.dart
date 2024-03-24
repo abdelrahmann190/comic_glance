@@ -45,7 +45,7 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
                 builder: (context, state) {
                   return state.whenOrNull(
                         loading: () {
-                          return const LoadingWidget();
+                          return const Center(child: LoadingWidget());
                         },
                         loadingSuccess: (data) {
                           return ComicBooksGridView(data: data);

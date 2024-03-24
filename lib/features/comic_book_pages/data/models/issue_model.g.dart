@@ -37,6 +37,36 @@ IssueModel _$IssueModelFromJson(Map<String, dynamic> json) => IssueModel(
       imageModel: ImageModel.fromJson(json['image'] as Map<String, dynamic>),
       name: json['name'] as String?,
       siteDetailUrl: json['site_detail_url'] as String?,
+      volumeMapped: json['volumeMapped'] == null
+          ? null
+          : CreditsModel.fromJson(json['volumeMapped'] as Map<String, dynamic>),
+      teamsDisbandedInMapped: (json['teamsDisbandedInMapped'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      teamCreditsMapped: (json['teamCreditsMapped'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      storyArcCreditsMapped: (json['storyArcCreditsMapped'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      personCreditsMapped: (json['personCreditsMapped'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      objectCreditsMapped: (json['objectCreditsMapped'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      locationCreditsMapped: (json['locationCreditsMapped'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      conceptCreditsMapped: (json['conceptCreditsMapped'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      charactersDiedInMapped: (json['charactersDiedInMapped'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      characterCreditsMapped: (json['characterCreditsMapped'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$IssueModelToJson(IssueModel instance) =>
@@ -71,4 +101,14 @@ Map<String, dynamic> _$IssueModelToJson(IssueModel instance) =>
       'image': ImageModel.toJson(instance.imageModel),
       'name': instance.name,
       'site_detail_url': instance.siteDetailUrl,
+      'volumeMapped': instance.volumeMapped,
+      'characterCreditsMapped': instance.characterCreditsMapped,
+      'charactersDiedInMapped': instance.charactersDiedInMapped,
+      'conceptCreditsMapped': instance.conceptCreditsMapped,
+      'locationCreditsMapped': instance.locationCreditsMapped,
+      'objectCreditsMapped': instance.objectCreditsMapped,
+      'personCreditsMapped': instance.personCreditsMapped,
+      'storyArcCreditsMapped': instance.storyArcCreditsMapped,
+      'teamCreditsMapped': instance.teamCreditsMapped,
+      'teamsDisbandedInMapped': instance.teamsDisbandedInMapped,
     };

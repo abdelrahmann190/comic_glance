@@ -1,5 +1,5 @@
 import 'package:comic_glance/core/theming/text_style.dart';
-import 'package:comic_glance/features/comic_book_pages/data/models/volume_model.dart';
+import 'package:comic_glance/features/comic_book_pages/data/models/character_model.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/widgets/credits_list.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/widgets/description_view_widget.dart';
@@ -10,20 +10,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class VolumePage extends StatefulWidget {
+class CharacterPage extends StatefulWidget {
   final String issueLink;
   final String navigationLink;
-  const VolumePage({
+  const CharacterPage({
     super.key,
     required this.issueLink,
     required this.navigationLink,
   });
 
   @override
-  State<VolumePage> createState() => _VolumePageState();
+  State<CharacterPage> createState() => _CharacterPageState();
 }
 
-class _VolumePageState extends State<VolumePage> {
+class _CharacterPageState extends State<CharacterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,43 +40,51 @@ class _VolumePageState extends State<VolumePage> {
   }
 
   Widget buildSuccessSection(data) {
-    final volumeModel = data as VolumeModel;
+    final characterModel = data as CharacterModel;
     var children = [
       Gap(15.px),
       Text(
-        volumeModel.name ?? '',
+        '${characterModel.name} ${characterModel.realName}',
         style: TextStyles.font15DynamicMedium,
       ),
-      DescriptionViewWidget(description: volumeModel.description),
+      DescriptionViewWidget(description: characterModel.description),
       CreditsList(
-        headerText:
-            'issues: ${volumeModel.issues != null ? volumeModel.issues!.length : ''}',
-        creditsModelList: volumeModel.issues,
+        headerText: 'powers: ${characterModel.powers!.length}',
+        creditsModelList: characterModel.powers,
       ),
       CreditsList(
-        headerText:
-            'characters: ${volumeModel.characters != null ? volumeModel.characters!.length : ''}',
-        creditsModelList: volumeModel.characters,
+        headerText: 'issues: ${characterModel.issueCredits!.length}',
+        creditsModelList: characterModel.issueCredits,
       ),
       CreditsList(
-        headerText:
-            'Locations: ${volumeModel.locations != null ? volumeModel.locations!.length : ''}',
-        creditsModelList: volumeModel.locations,
+        headerText: 'issues died in: ${characterModel.issuesDiedIn!.length}',
+        creditsModelList: characterModel.issuesDiedIn,
       ),
       CreditsList(
-        headerText:
-            'people: ${volumeModel.people != null ? volumeModel.people!.length : ''}',
-        creditsModelList: volumeModel.people,
+        headerText: 'movies: ${characterModel.movies!.length}',
+        creditsModelList: characterModel.movies,
+      ),
+      CreditsList(
+        headerText: 'teams: ${characterModel.teams!.length}',
+        creditsModelList: characterModel.teams,
+      ),
+      CreditsList(
+        headerText: 'friends: ${characterModel.characterFriends!.length}',
+        creditsModelList: characterModel.characterFriends,
+      ),
+      CreditsList(
+        headerText: 'enemies: ${characterModel.characterEnemies!.length}',
+        creditsModelList: characterModel.characterEnemies,
       ),
       CreditsList(
         headerText: 'Publisher',
-        creditsModelList: [volumeModel.publisher!],
+        creditsModelList: [characterModel.publisher!],
       ),
     ];
     return ObjectContent(
-      title: volumeModel.name ?? '',
-      commonDataModel: volumeModel.commonDataModel,
-      backgroundImageUrl: volumeModel.imageModel!.mediumUrl ?? '',
+      title: characterModel.name ?? '',
+      commonDataModel: characterModel,
+      backgroundImageUrl: characterModel.imageModel!.mediumUrl ?? '',
       children: children,
     );
   }
@@ -88,6 +96,8 @@ class _VolumePageState extends State<VolumePage> {
   }
 
   void volumePageInitFunc() {
-    context.read<ComicBooksCubit>().getVolumeFromCustomLink(widget.issueLink);
+    context
+        .read<ComicBooksCubit>()
+        .getCharacterFromCustomLink(widget.issueLink);
   }
 }

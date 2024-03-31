@@ -1,13 +1,15 @@
 class ApiConstants {
-  static const String apiKey =
-      '?api_key=c04dc84242228c6db4bf419f94ea92fc07026a9f';
   static const String jsonFormat = '&format=json';
   static const String baseUrl = 'http://www.comicvine.com/api';
   static const String characterUrl = '/character/';
   static const String charactersListUrl = '/characters/';
   static const String issueUrl = '/issue/';
   static const String issuesListUrl = '/issues/';
+  static const String volumeUrl = '/volume/';
+
   static const String volumesListUrl = '/volumes/';
+  static const String publisherUrl = '/publisher/';
+
   static const String publishersListUrl = '/publishers/';
 
   static const String sortStoreDateDesc = '&sort=store_date:desc';
@@ -26,10 +28,37 @@ class ApiConstants {
   static const String search = '/search/';
 
   static const String issueID = '4000';
+  static const String characterID = '4005';
+
   static const String volumeID = '4050';
   static const String publisherID = '4010';
 
   static const List<String> searchResultsFilterList = [];
+
+  static String _getNavSegmentFromNavUrl(String navUrl) {
+    if (navUrl.contains(issueID)) {
+      return issueUrl;
+    }
+    if (navUrl.contains(volumeID)) {
+      return volumeUrl;
+    }
+    if (navUrl.contains(publisherID)) {
+      return publisherUrl;
+    }
+    if (navUrl.contains(characterID)) {
+      return characterUrl;
+    }
+    return '';
+  }
+
+  static String buildACustomLinkFromNavigationUrl(String navUrl) {
+    List<String> segments = navUrl.split('/').reversed.toList();
+    segments.removeWhere((element) => element.isEmpty);
+    final String lastSegment = '${segments.first}/';
+    final finalLink =
+        baseUrl + _getNavSegmentFromNavUrl(lastSegment) + lastSegment;
+    return finalLink;
+  }
 }
 
 class ApiErrorMessages {

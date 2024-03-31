@@ -32,11 +32,9 @@ class CommonDataModel extends HiveObject {
   final int? id;
   @JsonKey(
     name: 'image',
-    fromJson: ImageModel.fromJson,
-    toJson: ImageModel.toJson,
   )
   @HiveField(7)
-  final ImageModel imageModel;
+  final ImageModel? imageModel;
   @JsonKey(name: 'name')
   @HiveField(8)
   final String? name;
@@ -52,7 +50,7 @@ class CommonDataModel extends HiveObject {
     this.deck,
     this.description,
     this.id,
-    required this.imageModel,
+    this.imageModel,
     this.name,
     this.siteDetailUrl,
   });
@@ -61,6 +59,5 @@ class CommonDataModel extends HiveObject {
     return _$CommonDataModelFromJson(json);
   }
 
-  static Map<String, dynamic> toJson(CommonDataModel commonDataModel) =>
-      _$CommonDataModelToJson(commonDataModel);
+  Map<String, dynamic> toJson() => _$CommonDataModelToJson(this);
 }

@@ -59,6 +59,9 @@ dependencies:
   hive_flutter: ^1.1.0
   hive_generator: ^2.0.1
   html: ^0.15.4
+  flutter_widget_from_html: ^0.14.11
+  flutter_secure_storage: ^9.0.0
+  cloud_firestore: ^4.15.10
 
 dev_dependencies:
   flutter_lints: ^2.0.0

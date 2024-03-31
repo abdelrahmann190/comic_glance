@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_glance/core/helpers/date_time_helper.dart';
 import 'package:comic_glance/core/networking/api_constants.dart';
 import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/my_library_cubit/my_library_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/widgets/card_cover_image.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,16 +47,10 @@ class ComicBookCardState extends State<ComicBookCard> {
               children: [
                 Stack(
                   children: [
-                    SizedBox(
+                    CardCoverImage(
                       width: 160.px,
                       height: 230.px,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15.px),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.data.imageModel.thumbUrl ?? '',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                      imageUrl: widget.data.imageModel!.thumbUrl ?? '',
                     ),
                     Container(
                       alignment: Alignment.bottomRight,
@@ -83,7 +77,7 @@ class ComicBookCardState extends State<ComicBookCard> {
                   width: 160.px,
                   child: BodyContentTextLight(
                     data: DateTimeHelper.formateYMD(
-                      widget.data.dateLastUpdated ?? '',
+                      widget.data.dateAdded ?? '',
                     ),
                   ),
                 ),
@@ -126,7 +120,7 @@ class ComicBookCardState extends State<ComicBookCard> {
     return Opacity(
       opacity: _isButtonsVisible ? 1 : 0,
       child: FavoriteButton(
-        isItemAdded: _isItemAdded,
+        isItemAddedNotifier: ValueNotifier(_isItemAdded),
         onPressed: onFavoriteButtonPressed,
       ),
     );

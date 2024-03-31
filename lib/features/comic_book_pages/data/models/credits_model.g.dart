@@ -12,6 +12,7 @@ CreditsModel _$CreditsModelFromJson(Map<String, dynamic> json) => CreditsModel(
       name: json['name'] as String?,
       siteDetailUrl: json['site_detail_url'] as String?,
       role: json['role'] as String?,
+      issueNumber: json['issue_number'] as String?,
     );
 
 Map<String, dynamic> _$CreditsModelToJson(CreditsModel instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$CreditsModelToJson(CreditsModel instance) =>
       'name': instance.name,
       'site_detail_url': instance.siteDetailUrl,
       'role': instance.role,
+      'issue_number': instance.issueNumber,
     };

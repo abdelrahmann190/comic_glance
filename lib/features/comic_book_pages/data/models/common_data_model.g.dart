@@ -24,7 +24,7 @@ class CommonDataModelAdapter extends TypeAdapter<CommonDataModel> {
       deck: fields[4] as String?,
       description: fields[5] as String?,
       id: fields[6] as int?,
-      imageModel: fields[7] as ImageModel,
+      imageModel: fields[7] as ImageModel?,
       name: fields[8] as String?,
       siteDetailUrl: fields[9] as String?,
     );
@@ -80,7 +80,9 @@ CommonDataModel _$CommonDataModelFromJson(Map<String, dynamic> json) =>
       deck: json['deck'] as String?,
       description: json['description'] as String?,
       id: json['id'] as int?,
-      imageModel: ImageModel.fromJson(json['image'] as Map<String, dynamic>),
+      imageModel: json['image'] == null
+          ? null
+          : ImageModel.fromJson(json['image'] as Map<String, dynamic>),
       name: json['name'] as String?,
       siteDetailUrl: json['site_detail_url'] as String?,
     );
@@ -94,7 +96,7 @@ Map<String, dynamic> _$CommonDataModelToJson(CommonDataModel instance) =>
       'deck': instance.deck,
       'description': instance.description,
       'id': instance.id,
-      'image': ImageModel.toJson(instance.imageModel),
+      'image': instance.imageModel,
       'name': instance.name,
       'site_detail_url': instance.siteDetailUrl,
     };

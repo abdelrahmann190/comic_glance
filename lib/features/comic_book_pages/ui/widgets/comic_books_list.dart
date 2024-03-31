@@ -1,4 +1,6 @@
 import 'package:comic_glance/core/helpers/enums.dart';
+import 'package:comic_glance/core/helpers/extensions.dart';
+import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/core/widgets/loading_widget.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_state.dart';
@@ -80,7 +82,14 @@ class ComicBooksList extends StatelessWidget {
                 ),
                 Gap(15.px),
                 ShowMoreCard(
-                  data: data,
+                  onTap: () {
+                    context.pushNamed(
+                      AppRoutes.showMorePage,
+                      arguments: data,
+                    );
+                  },
+                  width: 160.px,
+                  height: 230.px,
                 ),
               ],
             );

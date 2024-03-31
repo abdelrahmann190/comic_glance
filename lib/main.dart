@@ -1,6 +1,7 @@
 import 'package:comic_glance/comic_glance_app.dart';
 import 'package:comic_glance/core/consts/app_strings.dart';
 import 'package:comic_glance/core/di/getit_di.dart';
+import 'package:comic_glance/core/networking/api_key_service.dart';
 import 'package:comic_glance/core/networking/connection_checker.dart';
 import 'package:comic_glance/core/router/app_router.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
@@ -24,6 +25,7 @@ void main() async {
     options: DefaultFirebaseOptions.android,
   );
   await GetitDI.init();
+  await getItInstance<ApiKeyService>().storeApiKey();
   final connectionChecker = getItInstance<ConnectionChecker>();
   runApp(
     ComicGlanceApp(

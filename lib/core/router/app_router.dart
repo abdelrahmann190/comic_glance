@@ -6,10 +6,12 @@ import 'package:comic_glance/core/pages/no_internet_connection_page.dart';
 import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/features/bottom_navigation/ui/pages/main_navigation_page.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
+import 'package:comic_glance/features/comic_book_pages/data/models/credits_model.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/my_library_cubit/my_library_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/pages/character_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/issue_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/publisher_page.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/pages/show_more_credits_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/show_more_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/volume_page.dart';
 import 'package:comic_glance/features/login/ui/pages/login_page.dart';
@@ -46,11 +48,33 @@ class AppRouter {
           builder: (_) => const MainNavigationPage(),
         );
       case AppRoutes.issuePage:
-      case AppRoutes.volumePage:
-      case AppRoutes.publisherPage:
         return _buildAuthenticatedPageRoute(
           settings,
           (issueLink, navigationLink) => IssuePage(
+            issueLink: issueLink,
+            navigationLink: navigationLink,
+          ),
+        );
+      case AppRoutes.volumePage:
+        return _buildAuthenticatedPageRoute(
+          settings,
+          (issueLink, navigationLink) => VolumePage(
+            issueLink: issueLink,
+            navigationLink: navigationLink,
+          ),
+        );
+      case AppRoutes.publisherPage:
+        return _buildAuthenticatedPageRoute(
+          settings,
+          (issueLink, navigationLink) => PublisherPage(
+            issueLink: issueLink,
+            navigationLink: navigationLink,
+          ),
+        );
+      case AppRoutes.characterPage:
+        return _buildAuthenticatedPageRoute(
+          settings,
+          (issueLink, navigationLink) => CharacterPage(
             issueLink: issueLink,
             navigationLink: navigationLink,
           ),
@@ -59,6 +83,12 @@ class AppRouter {
         return AuthenticatedRoute(
           builder: (_) => ShowMorePage(
             data: settings.arguments as List<CommonDataModel>,
+          ),
+        );
+      case AppRoutes.showMoreCreditsPage:
+        return AuthenticatedRoute(
+          builder: (_) => ShowMoreCreditsPage(
+            data: settings.arguments as List<CreditsModel>,
           ),
         );
       default:

@@ -13,6 +13,8 @@ class CreditsModel {
   final String? siteDetailUrl;
   @JsonKey(name: 'role')
   final String? role;
+  @JsonKey(name: 'issue_number')
+  final String? issueNumber;
 
   CreditsModel({
     this.apiDetailUrl,
@@ -20,22 +22,14 @@ class CreditsModel {
     this.name,
     this.siteDetailUrl,
     this.role,
+    this.issueNumber,
   });
 
-  factory CreditsModel.fromJson(Map<String, dynamic> json) =>
-      _$CreditsModelFromJson(json);
-
-  static List<CreditsModel>? getListOfCreditsModel(List? creditsList) {
-    if (creditsList != null && creditsList.isNotEmpty) {
-      final cleanedCreditsList = creditsList;
-      cleanedCreditsList.removeWhere((element) => element == null);
-      return cleanedCreditsList.map(
-        (credits) {
-          return CreditsModel.fromJson(credits);
-        },
-      ).toList();
+  static CreditsModel fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return CreditsModel();
     }
-    return null;
+    return _$CreditsModelFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$CreditsModelToJson(this);

@@ -69,6 +69,27 @@ class ComicBooksCubit extends Cubit<ComicBooksState> {
     );
   }
 
+  void getVolumeFromCustomLink(
+    String customLink,
+  ) async {
+    emit(
+      const ComicBooksState.loading(),
+    );
+    final result = await _comicBooksRepo.getVolumeFromCustomLink(customLink);
+    result.when(
+      success: (data) {
+        emit(
+          ComicBooksState.success(data),
+        );
+      },
+      failure: (error) {
+        emit(
+          ComicBooksState.loadingError(error.apiErrorModel.message ?? ''),
+        );
+      },
+    );
+  }
+
   void getIssueFromCustomLink(
     String customLink,
   ) async {
@@ -76,6 +97,48 @@ class ComicBooksCubit extends Cubit<ComicBooksState> {
       const ComicBooksState.loading(),
     );
     final result = await _comicBooksRepo.getIssueFromCustomLink(customLink);
+    result.when(
+      success: (data) {
+        emit(
+          ComicBooksState.success(data),
+        );
+      },
+      failure: (error) {
+        emit(
+          ComicBooksState.loadingError(error.apiErrorModel.message ?? ''),
+        );
+      },
+    );
+  }
+
+  void getCharacterFromCustomLink(
+    String customLink,
+  ) async {
+    emit(
+      const ComicBooksState.loading(),
+    );
+    final result = await _comicBooksRepo.getCharacterFromCustomLink(customLink);
+    result.when(
+      success: (data) {
+        emit(
+          ComicBooksState.success(data),
+        );
+      },
+      failure: (error) {
+        emit(
+          ComicBooksState.loadingError(error.apiErrorModel.message ?? ''),
+        );
+      },
+    );
+  }
+
+  void getPublisherFromCustomLink(
+    String customLink,
+  ) async {
+    emit(
+      const ComicBooksState.loading(),
+    );
+    final result = await _comicBooksRepo.getPublisherFromCustomLink(customLink);
     result.when(
       success: (data) {
         emit(

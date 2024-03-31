@@ -48,6 +48,5 @@ class ImageModel {
 
   factory ImageModel.fromJson(Map<String, dynamic> json) =>
       _$ImageModelFromJson(json);
-  static Map<String, dynamic> toJson(ImageModel instance) =>
-      _$ImageModelToJson(instance);
+  Map<String, dynamic> toJson() => _$ImageModelToJson(this);
 }

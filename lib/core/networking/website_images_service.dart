@@ -7,6 +7,9 @@ class WebsiteImagesService {
   WebsiteImagesService(this.dio);
 
   Future<String?> fetchImageFromWebsiteLink(String websitePath) async {
+    if (websitePath.isEmpty) {
+      return '';
+    }
     final url = Uri(
       scheme: 'https',
       host: 'www.comicvine.gamespot.com',

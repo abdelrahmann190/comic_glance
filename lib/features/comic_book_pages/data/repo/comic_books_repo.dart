@@ -6,6 +6,7 @@ import 'package:comic_glance/core/networking/networking_error_handler.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/character_model.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/issue_model.dart';
+import 'package:comic_glance/features/comic_book_pages/data/models/movie_model.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/publisher_model.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/volume_model.dart';
 
@@ -82,7 +83,6 @@ class ComicBooksRepo {
         ),
       );
     } catch (error) {
-      print(error);
       return ApiResult.failure(
         ErrorHandler.handle(error),
       );
@@ -102,7 +102,6 @@ class ComicBooksRepo {
         ),
       );
     } catch (error) {
-      print(error);
       return ApiResult.failure(
         ErrorHandler.handle(error),
       );
@@ -122,7 +121,6 @@ class ComicBooksRepo {
         ),
       );
     } catch (error) {
-      print(error);
       return ApiResult.failure(
         ErrorHandler.handle(error),
       );
@@ -142,7 +140,25 @@ class ComicBooksRepo {
         ),
       );
     } catch (error) {
-      print(error);
+      return ApiResult.failure(
+        ErrorHandler.handle(error),
+      );
+    }
+  }
+
+  Future<ApiResult<MovieModel>> getMovieFromCustomLink(
+    String customLink,
+  ) async {
+    try {
+      final apiResponse = await _getDataFromCustomLink(customLink);
+      final resultMap = apiResponse.results as Map<String, dynamic>;
+
+      return ApiResult.success(
+        MovieModel.fromJson(
+          resultMap,
+        ),
+      );
+    } catch (error) {
       return ApiResult.failure(
         ErrorHandler.handle(error),
       );

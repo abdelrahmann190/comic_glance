@@ -2,8 +2,8 @@ import 'package:comic_glance/core/helpers/extensions.dart';
 import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/core/theming/text_style.dart';
 import 'package:comic_glance/core/widgets/custom_error_dialog.dart';
-import 'package:comic_glance/features/login/logic/cubit/login_cubit.dart';
-import 'package:comic_glance/features/login/logic/cubit/login_state.dart';
+import 'package:comic_glance/features/login/logic/login_cubit/login_cubit.dart';
+import 'package:comic_glance/features/login/logic/login_cubit/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,7 +40,7 @@ class LogoutButton extends StatelessWidget {
                 logoutSuccess: () {
                   context.pushNamedAndRemoveUntil(AppRoutes.loginPage);
                 },
-                error: (error) {
+                logoutError: (error) {
                   context.pop();
                   showDialog(
                     context: context,

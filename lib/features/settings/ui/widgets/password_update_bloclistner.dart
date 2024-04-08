@@ -1,14 +1,14 @@
-import 'package:comic_glance/core/helpers/extensions.dart';
-import 'package:comic_glance/core/router/app_routes.dart';
+import 'package:comic_glance/core/widgets/body_header_text_bold.dart';
 import 'package:comic_glance/core/widgets/custom_error_dialog.dart';
 import 'package:comic_glance/core/widgets/loading_widget.dart';
 import 'package:comic_glance/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:comic_glance/features/login/logic/login_cubit/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
-class LoginBlocListener extends StatelessWidget {
-  const LoginBlocListener({super.key});
+class PasswordUpdateBloclistner extends StatelessWidget {
+  const PasswordUpdateBloclistner({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +18,35 @@ class LoginBlocListener extends StatelessWidget {
           loading: () {
             setupLoadingState(context);
           },
-          loginSuccess: (loginResponse) {
-            context.pushNamedAndRemoveUntil(AppRoutes.mainNavigationPage);
+          changePasswordSuccess: () {
+            setupSuccessState(context);
           },
-          loginError: (error) {
+          changePasswordError: (error) {
             setupErrorState(context, error);
           },
         );
       },
       child: const SizedBox.shrink(),
     );
+  }
+
+  setupSuccessState(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Center(
+        child: Dialog(
+          child: Padding(
+            padding: EdgeInsets.all(10.px),
+            child: const BodyHeaderText(
+              data: 'Password updated succesfully',
+            ),
+          ),
+        ),
+      ),
+    );
+    // Future.delayed(const Duration(seconds: 3)).then(
+    //   (value) => context.pop(),
+    // );
   }
 
   void setupLoadingState(BuildContext context) {
@@ -40,7 +59,6 @@ class LoginBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop();
     showDialog(
       context: context,
       builder: (context) => CustomErrorDialog(error: error),

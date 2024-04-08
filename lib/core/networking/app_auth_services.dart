@@ -23,6 +23,18 @@ class AppAuthServices {
     );
   }
 
+  Future<void> changeUserPassword(
+      {required String oldPassword, required String newPassword}) async {
+    final user = _auth.currentUser;
+    if (user != null) {
+      final email = user.email;
+      final credential =
+          EmailAuthProvider.credential(email: email!, password: oldPassword);
+      await user.reauthenticateWithCredential(credential);
+      await user.updatePassword(newPassword);
+    }
+  }
+
   Future<void> signOut() async {
     await _auth.signOut();
   }

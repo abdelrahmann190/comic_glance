@@ -1,11 +1,14 @@
 import 'package:comic_glance/core/widgets/body_header_text_bold.dart';
 import 'package:comic_glance/core/widgets/body_header_text_medium.dart';
 import 'package:comic_glance/core/widgets/main_page_header_text.dart';
+import 'package:comic_glance/features/login/logic/login_cubit/login_cubit.dart';
+import 'package:comic_glance/features/settings/ui/widgets/change_password_dialog.dart';
 import 'package:comic_glance/features/settings/ui/widgets/log_out_button.dart';
+import 'package:comic_glance/features/settings/ui/widgets/password_update_bloclistner.dart';
+import 'package:comic_glance/features/settings/ui/widgets/profile_field_row.dart';
 import 'package:comic_glance/features/settings/ui/widgets/theme_mode_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -38,7 +41,19 @@ class SettingsPage extends StatelessWidget {
                     Gap(25.px),
                     const BodyHeaderTextMedium(data: 'Edit username'),
                     Gap(25.px),
-                    const BodyHeaderTextMedium(data: 'Change password'),
+                    ProfileFieldRow(
+                      title: 'Change password',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return ChangePasswordDialog(
+                              loginCubitInstance: context.read<LoginCubit>(),
+                            );
+                          },
+                        );
+                      },
+                    ),
                     Gap(25.px),
                     const BodyHeaderTextMedium(data: 'Email address'),
                     Gap(50.px),
@@ -58,6 +73,7 @@ class SettingsPage extends StatelessWidget {
             left: 25.w,
             child: const LogoutButton(),
           ),
+          const PasswordUpdateBloclistner(),
         ],
       ),
     );

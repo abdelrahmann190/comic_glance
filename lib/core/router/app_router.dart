@@ -1,8 +1,6 @@
 import 'package:comic_glance/core/di/getit_di.dart';
 import 'package:comic_glance/core/networking/api_constants.dart';
 import 'package:comic_glance/core/networking/auth_state.dart';
-import 'package:comic_glance/core/networking/connection_checker.dart';
-import 'package:comic_glance/core/pages/no_internet_connection_page.dart';
 import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/features/bottom_navigation/ui/pages/main_navigation_page.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
@@ -10,30 +8,19 @@ import 'package:comic_glance/features/comic_book_pages/data/models/credits_model
 import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/character_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/issue_page.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/pages/movie_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/publisher_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/show_more_credits_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/show_more_page.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/pages/volume_page.dart';
 import 'package:comic_glance/features/login/ui/pages/login_page.dart';
+import 'package:comic_glance/features/signup/logic/cubit/signup_cubit.dart';
 import 'package:comic_glance/features/signup/ui/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  final bool _internetConnection;
-
-  AppRouter(this._internetConnection);
-  Route? generateRoute(RouteSettings settings) {
-    if (_internetConnection) {
-      return _buildAuthenticatedRoute(settings);
-    } else {
-      return MaterialPageRoute(
-        builder: (_) => const NoInternetConnectionPage(),
-      );
-    }
-  }
-
-  Route? _buildAuthenticatedRoute(RouteSettings settings) {
+  static Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.loginPage:
         return MaterialPageRoute(
@@ -41,7 +28,10 @@ class AppRouter {
         );
       case AppRoutes.signUpPage:
         return MaterialPageRoute(
-          builder: (_) => const SignupPage(),
+          builder: (_) => BlocProvider(
+            create: (context) => getItInstance<SignupCubit>(),
+            child: const SignupPage(),
+          ),
         );
       case AppRoutes.mainNavigationPage:
         return AuthenticatedRoute(
@@ -79,6 +69,14 @@ class AppRouter {
             navigationLink: navigationLink,
           ),
         );
+      case AppRoutes.moviePage:
+        return _buildAuthenticatedPageRoute(
+          settings,
+          (issueLink, navigationLink) => MoviePage(
+            issueLink: issueLink,
+            navigationLink: navigationLink,
+          ),
+        );
       case AppRoutes.showMorePage:
         return AuthenticatedRoute(
           builder: (_) => ShowMorePage(
@@ -96,7 +94,7 @@ class AppRouter {
     }
   }
 
-  Route _buildAuthenticatedPageRoute(
+  static Route _buildAuthenticatedPageRoute(
       RouteSettings settings, Widget Function(String, String) pageBuilder) {
     final navigationMap = settings.arguments as Map;
     return AuthenticatedRoute(

@@ -1,30 +1,36 @@
 import 'package:comic_glance/core/helpers/app_regex.dart';
 import 'package:comic_glance/core/widgets/custom_text_form_field.dart';
-import 'package:comic_glance/features/login/logic/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class AuthForm extends StatefulWidget {
+  final GlobalKey<FormState> formKey;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  const AuthForm({
+    super.key,
+    required this.formKey,
+    required this.emailController,
+    required this.passwordController,
+  });
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<AuthForm> createState() => _AuthFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _AuthFormState extends State<AuthForm> {
   bool isObscureText = true;
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<LoginCubit>().formKey,
+      key: widget.formKey,
       child: Column(
         children: [
           CustomTextFormField(
             hintText: 'Email',
             icon: Icons.email_rounded,
-            controller: context.read<LoginCubit>().emailController,
+            controller: widget.emailController,
             isPasswordField: false,
             validator: (value) {
               if (value == null ||
@@ -39,7 +45,7 @@ class _LoginFormState extends State<LoginForm> {
           CustomTextFormField(
             hintText: 'password',
             icon: Icons.password_rounded,
-            controller: context.read<LoginCubit>().passwordController,
+            controller: widget.passwordController,
             isPasswordField: true,
             suffixIcon: GestureDetector(
               onTap: () {

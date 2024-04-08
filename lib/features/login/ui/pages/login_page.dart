@@ -2,10 +2,10 @@ import 'package:comic_glance/core/di/getit_di.dart';
 import 'package:comic_glance/core/helpers/extensions.dart';
 import 'package:comic_glance/core/widgets/main_page_header_text.dart';
 import 'package:comic_glance/core/widgets/round_text_button.dart';
-import 'package:comic_glance/features/login/logic/cubit/login_cubit.dart';
+import 'package:comic_glance/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:comic_glance/features/login/ui/widgets/dont_have_account.dart';
 import 'package:comic_glance/features/login/ui/widgets/login_bloclistner.dart';
-import 'package:comic_glance/features/login/ui/widgets/login_form.dart';
+import 'package:comic_glance/core/widgets/auth_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -65,7 +65,12 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const MainPageHeaderText(data: 'Log in'),
                     Gap(30.px),
-                    const LoginForm(),
+                    AuthForm(
+                        formKey: context.read<LoginCubit>().formKey,
+                        emailController:
+                            context.read<LoginCubit>().emailController,
+                        passwordController:
+                            context.read<LoginCubit>().passwordController),
                     Gap(15.px),
                     RoundTextbutton(
                       color: context.appCustomTheme.canvasColor,

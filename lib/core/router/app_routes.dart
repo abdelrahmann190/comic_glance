@@ -6,6 +6,7 @@ class AppRoutes {
   static const String volumePage = '/volumePage';
   static const String publisherPage = '/publisherPage';
   static const String characterPage = '/characterPage';
+  static const String moviePage = '/moviePage';
 
   static const String loginPage = '/loginPage';
   static const String signUpPage = '/signUpPage';
@@ -24,6 +25,9 @@ class AppRoutes {
     }
     if (apiLink.contains(ApiConstants.characterID)) {
       return characterPage;
+    }
+    if (apiLink.contains(ApiConstants.movieID)) {
+      return moviePage;
     }
     return '';
   }

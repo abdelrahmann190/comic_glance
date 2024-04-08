@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
+import 'package:comic_glance/core/networking/api_result.dart';
 
 import 'package:comic_glance/features/comic_book_pages/data/repo/comic_books_repo.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_state.dart';
@@ -72,73 +73,41 @@ class ComicBooksCubit extends Cubit<ComicBooksState> {
   void getVolumeFromCustomLink(
     String customLink,
   ) async {
-    emit(
-      const ComicBooksState.loading(),
-    );
-    final result = await _comicBooksRepo.getVolumeFromCustomLink(customLink);
-    result.when(
-      success: (data) {
-        emit(
-          ComicBooksState.success(data),
-        );
-      },
-      failure: (error) {
-        emit(
-          ComicBooksState.loadingError(error.apiErrorModel.message ?? ''),
-        );
-      },
-    );
+    _emitDataFromCustomLink(
+        _comicBooksRepo.getVolumeFromCustomLink(customLink));
   }
 
   void getIssueFromCustomLink(
     String customLink,
   ) async {
-    emit(
-      const ComicBooksState.loading(),
-    );
-    final result = await _comicBooksRepo.getIssueFromCustomLink(customLink);
-    result.when(
-      success: (data) {
-        emit(
-          ComicBooksState.success(data),
-        );
-      },
-      failure: (error) {
-        emit(
-          ComicBooksState.loadingError(error.apiErrorModel.message ?? ''),
-        );
-      },
-    );
+    _emitDataFromCustomLink(_comicBooksRepo.getIssueFromCustomLink(customLink));
   }
 
   void getCharacterFromCustomLink(
     String customLink,
   ) async {
-    emit(
-      const ComicBooksState.loading(),
-    );
-    final result = await _comicBooksRepo.getCharacterFromCustomLink(customLink);
-    result.when(
-      success: (data) {
-        emit(
-          ComicBooksState.success(data),
-        );
-      },
-      failure: (error) {
-        emit(
-          ComicBooksState.loadingError(error.apiErrorModel.message ?? ''),
-        );
-      },
-    );
+    _emitDataFromCustomLink(
+        _comicBooksRepo.getCharacterFromCustomLink(customLink));
   }
 
   void getPublisherFromCustomLink(
     String customLink,
   ) async {
+    _emitDataFromCustomLink(
+        _comicBooksRepo.getPublisherFromCustomLink(customLink));
+  }
+
+  void getMovieFromCustomLink(
+    String customLink,
+  ) async {
+    _emitDataFromCustomLink(_comicBooksRepo.getMovieFromCustomLink(customLink));
+  }
+
+  void _emitDataFromCustomLink(Future<ApiResult> futureResult) async {
     emit(
       const ComicBooksState.loading(),
     );
-    final result = await _comicBooksRepo.getPublisherFromCustomLink(customLink);
+    final result = await futureResult;
     result.when(
       success: (data) {
         emit(

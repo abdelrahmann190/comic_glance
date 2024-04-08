@@ -4,7 +4,7 @@ import 'package:comic_glance/features/login/data/repos/login_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:comic_glance/features/login/logic/cubit/login_state.dart';
+import 'package:comic_glance/features/login/logic/login_cubit/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit(
@@ -37,9 +37,27 @@ class LoginCubit extends Cubit<LoginState> {
       },
       failure: (error) {
         emit(
-          LoginState.error(
+          LoginState.loginError(
             error.apiErrorModel.message ?? '',
           ),
+        );
+      },
+    );
+  }
+
+  void changePassword(
+      {required String oldPassword, required String newPassword}) async {
+    final response = await _loginRepo.changePassword(
+        oldPassword: oldPassword, newPassword: newPassword);
+    response.when(
+      success: (data) {
+        emit(
+          const LoginState.changePasswordSuccess(),
+        );
+      },
+      failure: (error) {
+        emit(
+          LoginState.changePasswordError(error.apiErrorModel.message ?? ''),
         );
       },
     );
@@ -57,7 +75,7 @@ class LoginCubit extends Cubit<LoginState> {
       },
       failure: (error) {
         emit(
-          LoginState.error(
+          LoginState.logoutError(
             error.apiErrorModel.message ?? '',
           ),
         );

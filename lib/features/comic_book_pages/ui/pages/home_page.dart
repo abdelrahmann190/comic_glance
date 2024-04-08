@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: RefreshIndicator(
         onRefresh: () async {
-          await loadHomePageScreen();
+          await homePageApiCalls();
 
           await Future.delayed(
             const Duration(
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> loadHomePageScreen() async {
+  Future<void> homePageApiCalls() async {
     context.read<ComicBooksCubit>().getPopularPublishersList();
     context.read<ComicBooksCubit>().getForYouIssuesList();
     context.read<ComicBooksCubit>().getMostRecentVolumesList();
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    loadHomePageScreen();
+    homePageApiCalls();
     super.initState();
   }
 }

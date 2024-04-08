@@ -12,7 +12,6 @@ class MyLibraryRepo {
       final favoritesList = await localDatabaseServices.getFavoritesList();
       return ApiResult.success(favoritesList);
     } catch (error) {
-      print(error);
       return ApiResult.failure(
         ErrorHandler.handle(error),
       );

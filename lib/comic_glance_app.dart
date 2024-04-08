@@ -5,6 +5,7 @@ import 'package:comic_glance/core/theming/app_theme.dart';
 import 'package:comic_glance/core/theming/theme_controller.dart';
 import 'package:comic_glance/features/comic_book_pages/logic/my_library_cubit/my_library_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 
 import 'package:comic_glance/core/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,10 +13,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ComicGlanceApp extends StatelessWidget {
   final ThemeController _themeController;
-  final AppRouter appRouter;
   const ComicGlanceApp(
     this._themeController, {
-    required this.appRouter,
     Key? key,
   }) : super(key: key);
 
@@ -28,13 +27,22 @@ class ComicGlanceApp extends StatelessWidget {
           builder: (BuildContext context, Widget? child) {
             return BlocProvider(
               create: (context) => getItInstance<MyLibraryCubit>(),
-              child: MaterialApp(
-                theme: AppTheme.light(),
-                darkTheme: AppTheme.dark(),
-                themeMode: _themeController.themeMode,
-                initialRoute: AppRoutes.mainNavigationPage,
-                onGenerateRoute: appRouter.generateRoute,
-                debugShowCheckedModeBanner: false,
+              child: ConnectivityAppWrapper(
+                app: MaterialApp(
+                  theme: AppTheme.light(),
+                  darkTheme: AppTheme.dark(),
+                  themeMode: _themeController.themeMode,
+                  initialRoute: AppRoutes.mainNavigationPage,
+                  onGenerateRoute: AppRouter.generateRoute,
+                  debugShowCheckedModeBanner: false,
+                  builder: (buildContext, widget) {
+                    return ConnectivityWidgetWrapper(
+                      disableInteraction: true,
+                      height: 80,
+                      child: widget ?? const SizedBox.shrink(),
+                    );
+                  },
+                ),
               ),
             );
           },

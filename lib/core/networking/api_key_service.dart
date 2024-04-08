@@ -20,7 +20,7 @@ class ApiKeyService {
         await _storage.write(key: 'api_key', value: '');
       }
     } catch (e) {
-      print(e);
+      throw Exception([e]);
     }
   }
 

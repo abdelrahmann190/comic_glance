@@ -32,6 +32,7 @@ class ApiConstants {
 
   static const String volumeID = '4050';
   static const String publisherID = '4010';
+  static const String movieID = '4025';
 
   static const List<String> searchResultsFilterList = [];
 

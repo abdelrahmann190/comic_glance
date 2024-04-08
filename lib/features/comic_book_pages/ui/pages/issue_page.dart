@@ -1,12 +1,17 @@
-import 'package:comic_glance/core/widgets/loading_widget.dart';
+import 'package:comic_glance/core/theming/text_style.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/my_library_cubit/my_library_cubit.dart';
+
+import 'package:comic_glance/features/comic_book_pages/ui/widgets/credits_list.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/widgets/description_view_widget.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/widgets/object_blocbuilder.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/widgets/object_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:comic_glance/features/comic_book_pages/data/models/issue_model.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_cubit.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_state.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
 
 class IssuePage extends StatefulWidget {
   final String issueLink;
@@ -22,7 +27,6 @@ class IssuePage extends StatefulWidget {
 }
 
 class _IssuePageState extends State<IssuePage> {
-  late WebViewController controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,26 +36,7 @@ class _IssuePageState extends State<IssuePage> {
             horizontal: 15.px,
             vertical: 10.px,
           ),
-          child: BlocBuilder<ComicBooksCubit, ComicBooksState>(
-            builder: (context, state) {
-              return state.when(
-                initial: () {
-                  return const SizedBox.shrink();
-                },
-                loading: () {
-                  return const Center(child: LoadingWidget());
-                },
-                success: buildSuccessSection,
-                loadingError: (error) {
-                  // return ViewLinkWidget(
-                  //   navigationLink: widget.navigationLink,
-                  //   controller: controller,
-                  // );
-                  return Container();
-                },
-              );
-            },
-          ),
+          child: ObjectBlocbuilder(successFunction: buildSuccessSection),
         ),
       ),
     );
@@ -59,55 +44,66 @@ class _IssuePageState extends State<IssuePage> {
 
   Widget buildSuccessSection(data) {
     final issueModel = data as IssueModel;
-    return SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(
-              data.imageModel.mediumUrl ?? '',
-            ),
-          ),
-        ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  issueModel.name ?? issueModel.volume!['name'],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+    return ObjectContent(
+      title: 'Issue #${issueModel.issueNumber ?? ''}',
+      commonDataModel: issueModel,
+      backgroundImageUrl: '${issueModel.imageModel!.mediumUrl}',
+      children: getBodyWidgets(issueModel),
     );
+  }
+
+  List<Widget> getBodyWidgets(IssueModel issueModel) {
+    return [
+      Gap(15.px),
+      Text(
+        '${issueModel.name ?? issueModel.volume!.name ?? ''}, Issue: #${issueModel.issueNumber ?? ''}',
+        style: TextStyles.font15DynamicMedium,
+      ),
+      DescriptionViewWidget(description: issueModel.description),
+      CreditsList(
+        headerText: 'Volume',
+        creditsModelList: [issueModel.volume!],
+      ),
+      CreditsList(
+        headerText:
+            'Characters: ${issueModel.characterCredits != null ? issueModel.characterCredits!.length : ''}',
+        creditsModelList: issueModel.characterCredits,
+      ),
+      CreditsList(
+        headerText:
+            'Teams Involved: ${issueModel.teamCredits != null ? issueModel.teamCredits!.length : ''}',
+        creditsModelList: issueModel.teamCredits,
+      ),
+      CreditsList(
+        headerText:
+            'Story Arcs: ${issueModel.storyArcCredits != null ? issueModel.storyArcCredits!.length : ''}',
+        creditsModelList: issueModel.storyArcCredits,
+      ),
+      CreditsList(
+        headerText:
+            'Locations: ${issueModel.locationCredits != null ? issueModel.locationCredits!.length : ''}',
+        creditsModelList: issueModel.locationCredits,
+      ),
+      CreditsList(
+        headerText:
+            'Concepts: ${issueModel.conceptCredits != null ? issueModel.conceptCredits!.length : ''}',
+        creditsModelList: issueModel.conceptCredits,
+      ),
+      CreditsList(
+        headerText:
+            'Creators: ${issueModel.personCredits != null ? issueModel.personCredits!.length : ''}',
+        creditsModelList: issueModel.personCredits,
+      ),
+    ];
+  }
+
+  bool checkIfItemIsAdded(int id) {
+    return context.read<MyLibraryCubit>().isItemAdded(id);
   }
 
   @override
   void initState() {
     context.read<ComicBooksCubit>().getIssueFromCustomLink(widget.issueLink);
-    // controller = WebViewController()
-    //   ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    //   ..setBackgroundColor(Colors.black)
-    //   ..setNavigationDelegate(
-    //     NavigationDelegate(
-    //       onProgress: (int progress) {
-    //         // Update loading bar.
-    //       },
-    //       onPageStarted: (String url) {},
-    //       onPageFinished: (String url) {},
-    //       onWebResourceError: (WebResourceError error) {},
-    //       onNavigationRequest: (NavigationRequest request) {
-    //         if (request.url.contains('4005')) {
-    //           return NavigationDecision.prevent;
-    //         }
-    //         return NavigationDecision.navigate;
-    //       },
-    //     ),
-    //   )
-    //   ..loadRequest(Uri.parse(widget.navigationLink));
 
     super.initState();
   }

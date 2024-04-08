@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_services.dart';
+part of 'comic_glance_api_services.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -21,9 +21,10 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
   String? baseUrl;
 
   @override
-  Future<ApiResponseModel> getLatestIssuesList() async {
+  Future<ApiResponseModel> getLatestIssuesList(String? apiKey) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -34,7 +35,7 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
     )
             .compose(
               _dio.options,
-              '/issues/?api_key=c04dc84242228c6db4bf419f94ea92fc07026a9f&format=json&sort=store_date:desc&filter=name:batman',
+              '/issues/${apiKey}&format=json&sort=store_date:desc&filter=name:batman',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -48,9 +49,10 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
   }
 
   @override
-  Future<ApiResponseModel> getMostRecentVolumesList() async {
+  Future<ApiResponseModel> getMostRecentVolumesList(String? apiKey) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -61,7 +63,7 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
     )
             .compose(
               _dio.options,
-              '/volumes/?api_key=c04dc84242228c6db4bf419f94ea92fc07026a9f&format=json&sort=id:desc&filter=name:batman',
+              '/volumes/${apiKey}&format=json&sort=id:desc&filter=name:batman',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -75,9 +77,10 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
   }
 
   @override
-  Future<ApiResponseModel> getPopularPublishersList() async {
+  Future<ApiResponseModel> getPopularPublishersList(String? apiKey) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -88,7 +91,7 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
     )
             .compose(
               _dio.options,
-              '/publishers/?api_key=c04dc84242228c6db4bf419f94ea92fc07026a9f&format=json&sort=id:asc',
+              '/publishers/${apiKey}&format=json&sort=id:asc',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -102,9 +105,13 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
   }
 
   @override
-  Future<ApiResponseModel> getDataFromCustomLink(String customLink) async {
+  Future<ApiResponseModel> getDataFromCustomLink(
+    String customLink,
+    String? apiKey,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -115,7 +122,39 @@ class _ComicGlanceApiService implements ComicGlanceApiService {
     )
             .compose(
               _dio.options,
-              '${customLink}?api_key=c04dc84242228c6db4bf419f94ea92fc07026a9f&format=json',
+              '${customLink}${apiKey}&format=json',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ApiResponseModel> getSearchResults(
+    String searchQuery,
+    String searchFilters,
+    String? apiKey,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ApiResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/search/${apiKey}&format=json&query=${searchQuery}&resources=${searchFilters}',
               queryParameters: queryParameters,
               data: _data,
             )

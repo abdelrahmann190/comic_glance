@@ -3,7 +3,11 @@ import 'package:comic_glance/core/helpers/date_time_helper.dart';
 import 'package:comic_glance/core/networking/api_constants.dart';
 import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/my_library_cubit/my_library_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/widgets/card_cover_image.dart';
+import 'package:comic_glance/features/comic_book_pages/ui/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -25,37 +29,41 @@ class ComicBookCard extends StatefulWidget {
 
 class ComicBookCardState extends State<ComicBookCard> {
   bool _isButtonsVisible = false;
+  bool _isItemAdded = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTapCancel: () {
+        setState(() {
+          _isButtonsVisible = false;
+        });
+      },
       onTap: cardOnTapFunction,
       child: SizedBox(
         child: Stack(
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 160.px,
-                  height: 230.px,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.px),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        widget.data.imageModel.mediumUrl ?? '',
-                      ),
-                      colorFilter: _isButtonsVisible
-                          ? const ColorFilter.mode(
-                              Colors.black38,
-                              BlendMode.darken,
-                            )
-                          : null,
-                      fit: BoxFit.cover,
+                Stack(
+                  children: [
+                    CardCoverImage(
+                      width: 160.px,
+                      height: 230.px,
+                      imageUrl: widget.data.imageModel!.thumbUrl ?? '',
                     ),
-                  ),
-                  child: buildImageContainerChild(),
+                    Container(
+                      alignment: Alignment.bottomRight,
+                      padding: EdgeInsets.all(5.px),
+                      width: 160.px,
+                      height: _isButtonsVisible ? 230.px : 0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.px),
+                        color: Colors.black26,
+                      ),
+                      child: buildAnimatedButton(),
+                    ),
+                  ],
                 ),
                 Gap(10.px),
                 SizedBox(
@@ -69,7 +77,7 @@ class ComicBookCardState extends State<ComicBookCard> {
                   width: 160.px,
                   child: BodyContentTextLight(
                     data: DateTimeHelper.formateYMD(
-                      widget.data.dateLastUpdated ?? '',
+                      widget.data.dateAdded ?? '',
                     ),
                   ),
                 ),
@@ -79,21 +87,6 @@ class ComicBookCardState extends State<ComicBookCard> {
         ),
       ),
     );
-  }
-
-  Widget buildImageContainerChild() {
-    return Container();
-    // return Row(
-    //   mainAxisAlignment: MainAxisAlignment.end,
-    //   crossAxisAlignment: CrossAxisAlignment.end,
-    //   children: List.generate(
-    //     widget.buttons.length,
-    //     (index) => _buildAnimatedButton(
-    //       index,
-    //       widget.buttons[index],
-    //     ),
-    //   ),
-    // );
   }
 
   void cardOnTapFunction() {
@@ -117,19 +110,58 @@ class ComicBookCardState extends State<ComicBookCard> {
       setState(
         () {
           _isButtonsVisible = !_isButtonsVisible;
+          _isItemAdded = checkIfItemIsAdded();
         },
       );
     }
   }
 
-  Widget _buildAnimatedButton(int index, Widget button) {
-    return SizedBox(
-      height: _isButtonsVisible ? null : 0,
-      child: AnimatedOpacity(
-        opacity: _isButtonsVisible ? 1.0 : 0.0,
-        duration: const Duration(milliseconds: 200),
-        child: button,
+  Widget buildAnimatedButton() {
+    return Opacity(
+      opacity: _isButtonsVisible ? 1 : 0,
+      child: FavoriteButton(
+        isItemAddedNotifier: ValueNotifier(_isItemAdded),
+        onPressed: onFavoriteButtonPressed,
       ),
     );
+  }
+
+  void onFavoriteButtonPressed() {
+    if (_isItemAdded) {
+      context.read<MyLibraryCubit>().removeFavoriteObject(widget.data.id).then(
+        (value) {
+          if (!checkIfItemIsAdded()) {
+            setIsItemAddedValue();
+          }
+        },
+      );
+    } else {
+      context.read<MyLibraryCubit>().addFavoriteObject(widget.data).then(
+        (value) {
+          if (checkIfItemIsAdded()) {
+            setIsItemAddedValue();
+          }
+        },
+      );
+    }
+  }
+
+  void setIsItemAddedValue() {
+    return setState(
+      () {
+        _isItemAdded = !_isItemAdded;
+        _isButtonsVisible = !_isButtonsVisible;
+      },
+    );
+  }
+
+  bool checkIfItemIsAdded() {
+    return context.read<MyLibraryCubit>().isItemAdded(widget.data.id);
+  }
+
+  @override
+  void initState() {
+    _isItemAdded = checkIfItemIsAdded();
+    super.initState();
   }
 }

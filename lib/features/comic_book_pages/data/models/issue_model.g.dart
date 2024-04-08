@@ -7,26 +7,65 @@ part of 'issue_model.dart';
 // **************************************************************************
 
 IssueModel _$IssueModelFromJson(Map<String, dynamic> json) => IssueModel(
-      characterCredits: json['character_credits'] as List<dynamic>?,
-      charactersDiedIn: json['characters_died_in'] as List<dynamic>?,
-      conceptCredits: json['concept_credits'] as List<dynamic>?,
+      characterCredits: (json['character_credits'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      charactersDiedIn: (json['characters_died_in'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      conceptCredits: (json['concept_credits'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       coverDate: json['cover_date'] as String?,
-      disbandedTeams: json['disbanded_teams'] as String?,
-      firstApperanceCharacters: json['first_appearance_characters'] as String?,
-      firstApperanceConcepts: json['first_appearance_concepts'] as String?,
-      firstApperanceLocations: json['first_appearance_locations'] as String?,
-      firstApperanceObjects: json['first_appearance_objects'] as String?,
-      firstApperanceStoryArcs: json['first_appearance_storyarcs'] as String?,
-      firstApperanceTeams: json['first_appearance_teams'] as String?,
+      disbandedTeams: (json['disbanded_teams'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      firstApperanceCharacters:
+          (json['first_appearance_characters'] as List<dynamic>?)
+              ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      firstApperanceConcepts:
+          (json['first_appearance_concepts'] as List<dynamic>?)
+              ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      firstApperanceLocations:
+          (json['first_appearance_locations'] as List<dynamic>?)
+              ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      firstApperanceObjects:
+          (json['first_appearance_objects'] as List<dynamic>?)
+              ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      firstApperanceStoryArcs:
+          (json['first_appearance_storyarcs'] as List<dynamic>?)
+              ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      firstApperanceTeams: (json['first_appearance_teams'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       issueNumber: json['issue_number'] as String?,
-      locationCredits: json['location_credits'] as List<dynamic>?,
-      objectCredits: json['object_credits'] as List<dynamic>?,
-      personCredits: json['person_credits'] as List<dynamic>?,
+      locationCredits: (json['location_credits'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      objectCredits: (json['object_credits'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      personCredits: (json['person_credits'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       storeDate: json['store_date'] as String?,
-      storyArcCredits: json['story_arc_credits'] as List<dynamic>?,
-      teamCredits: json['team_credits'] as List<dynamic>?,
-      teamsDisbandedIn: json['teams_disbanded_in'] as List<dynamic>?,
-      volume: json['volume'] as Map<String, dynamic>?,
+      storyArcCredits: (json['story_arc_credits'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      teamCredits: (json['team_credits'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      teamsDisbandedIn: (json['teams_disbanded_in'] as List<dynamic>?)
+          ?.map((e) => CreditsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      volume: json['volume'] == null
+          ? null
+          : CreditsModel.fromJson(json['volume'] as Map<String, dynamic>),
       aliases: json['aliases'] as String?,
       apiDetailUrl: json['api_detail_url'] as String?,
       dateAdded: json['date_added'] as String?,
@@ -34,13 +73,25 @@ IssueModel _$IssueModelFromJson(Map<String, dynamic> json) => IssueModel(
       deck: json['deck'] as String?,
       description: json['description'] as String?,
       id: json['id'] as int?,
-      imageModel: ImageModel.fromJson(json['image'] as Map<String, dynamic>),
+      imageModel: json['image'] == null
+          ? null
+          : ImageModel.fromJson(json['image'] as Map<String, dynamic>),
       name: json['name'] as String?,
       siteDetailUrl: json['site_detail_url'] as String?,
     );
 
 Map<String, dynamic> _$IssueModelToJson(IssueModel instance) =>
     <String, dynamic>{
+      'aliases': instance.aliases,
+      'api_detail_url': instance.apiDetailUrl,
+      'date_added': instance.dateAdded,
+      'date_last_updated': instance.dateLastUpdated,
+      'deck': instance.deck,
+      'description': instance.description,
+      'id': instance.id,
+      'image': instance.imageModel,
+      'name': instance.name,
+      'site_detail_url': instance.siteDetailUrl,
       'character_credits': instance.characterCredits,
       'characters_died_in': instance.charactersDiedIn,
       'concept_credits': instance.conceptCredits,
@@ -61,14 +112,4 @@ Map<String, dynamic> _$IssueModelToJson(IssueModel instance) =>
       'team_credits': instance.teamCredits,
       'teams_disbanded_in': instance.teamsDisbandedIn,
       'volume': instance.volume,
-      'aliases': instance.aliases,
-      'api_detail_url': instance.apiDetailUrl,
-      'date_added': instance.dateAdded,
-      'date_last_updated': instance.dateLastUpdated,
-      'deck': instance.deck,
-      'description': instance.description,
-      'id': instance.id,
-      'image': ImageModel.toJson(instance.imageModel),
-      'name': instance.name,
-      'site_detail_url': instance.siteDetailUrl,
     };

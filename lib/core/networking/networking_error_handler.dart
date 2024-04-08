@@ -198,6 +198,9 @@ ApiErrorModel _handleFirebaseException(FirebaseAuthException error) {
       return ApiErrorModel(message: AuthErrorMessages.networkRequestFailed);
     case 'requires-recent-login':
       return ApiErrorModel(message: AuthErrorMessages.requiresRecentLogin);
+    case 'invalid-credential':
+      return ApiErrorModel(message: AuthErrorMessages.wrongPassword);
+
     default:
       return ApiErrorModel(message: AuthErrorMessages.unknownError);
   }

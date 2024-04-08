@@ -1,7 +1,9 @@
+import 'package:comic_glance/core/helpers/enums.dart';
+import 'package:comic_glance/core/helpers/extensions.dart';
+import 'package:comic_glance/core/router/app_routes.dart';
 import 'package:comic_glance/core/widgets/loading_widget.dart';
-import 'package:comic_glance/features/comic_book_pages/data/models/common_data_model.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_cubit.dart';
-import 'package:comic_glance/features/comic_book_pages/logic/cubit/comic_books_state.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_cubit.dart';
+import 'package:comic_glance/features/comic_book_pages/logic/comic_books_cubit/comic_books_state.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/widgets/comic_book_card.dart';
 import 'package:comic_glance/features/comic_book_pages/ui/widgets/show_more_card.dart';
 import 'package:flutter/material.dart';
@@ -10,33 +12,60 @@ import 'package:gap/gap.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ComicBooksList extends StatelessWidget {
-  const ComicBooksList({super.key});
+  final HomeScreenState loadWhenState;
+  const ComicBooksList({super.key, required this.loadWhenState});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ComicBooksCubit, ComicBooksState>(
-      buildWhen: (previous, current) =>
-          current is Loading || current is Success || current is LoadingError,
+      buildWhen: buildWhenFunction,
       builder: (context, state) {
-        return state.when(
-          initial: () {
-            return const SizedBox.shrink();
-          },
-          loading: () {
-            return const Center(child: LoadingWidget());
-          },
-          success: (data) {
-            return buildSuccessSection(data as List<CommonDataModel>);
-          },
-          loadingError: (error) {
-            return Text(error);
-          },
-        );
+        return state.whenOrNull(
+              loading: buildLoadingSection,
+              forYouIssuesListLoading: buildLoadingSection,
+              mostRecentVolumesListLoading: buildLoadingSection,
+              popularPublishersListLoading: buildLoadingSection,
+              success: buildSuccessSection,
+              forYouIssuesListSuccess: buildSuccessSection,
+              mostRecentVolumesListSuccess: buildSuccessSection,
+              popularPublishersListSuccess: buildSuccessSection,
+              loadingError: buildErrorSection,
+              forYouIssuesListError: buildErrorSection,
+              mostRecentVolumesListError: buildErrorSection,
+              popularPublishersListError: buildErrorSection,
+            ) ??
+            const SizedBox.shrink();
       },
     );
   }
 
-  SizedBox buildSuccessSection(List<CommonDataModel> data) {
+  bool buildWhenFunction(previous, current) {
+    if (loadWhenState == HomeScreenState.issuesForYou) {
+      return current is ForYouIssuesListLoading ||
+          current is ForYouIssuesListSuccess ||
+          current is ForYouIssuesListError;
+    } else if (loadWhenState == HomeScreenState.mostRecentVolumes) {
+      return current is MostRecentVolumesListLoading ||
+          current is MostRecentVolumesListSuccess ||
+          current is MostRecentVolumesListError;
+    } else if (loadWhenState == HomeScreenState.popularPublishers) {
+      return current is PopularPublishersListLoading ||
+          current is PopularPublishersListSuccess ||
+          current is PopularPublishersListError;
+    } else {
+      return false;
+    }
+  }
+
+  Widget? buildErrorSection(error) {
+    return Text(error);
+  }
+
+  Widget? buildLoadingSection() {
+    return const Center(child: LoadingWidget());
+  }
+
+  SizedBox buildSuccessSection(data) {
     return SizedBox(
       height: 300.px,
       child: ListView.builder(
@@ -53,7 +82,14 @@ class ComicBooksList extends StatelessWidget {
                 ),
                 Gap(15.px),
                 ShowMoreCard(
-                  data: data,
+                  onTap: () {
+                    context.pushNamed(
+                      AppRoutes.showMorePage,
+                      arguments: data,
+                    );
+                  },
+                  width: 160.px,
+                  height: 230.px,
                 ),
               ],
             );

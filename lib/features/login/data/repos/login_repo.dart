@@ -29,17 +29,27 @@ class LoginRepo {
     }
   }
 
-  Future<UserCredential> signup({
-    required String email,
-    required String password,
-  }) async {
-    return await _appAuthServices.signUpWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+  Future<ApiResult> changePassword(
+      {required String oldPassword, required String newPassword}) async {
+    try {
+      await _appAuthServices.changeUserPassword(
+          oldPassword: oldPassword, newPassword: newPassword);
+      return const ApiResult.success('password updated');
+    } catch (error) {
+      return ApiResult.failure(
+        ErrorHandler.handle(error),
+      );
+    }
   }
 
-  Future<void> logout() async {
-    _appAuthServices.signOut();
+  Future<ApiResult> logout() async {
+    try {
+      _appAuthServices.signOut();
+      return const ApiResult.success('logged out');
+    } catch (error) {
+      return ApiResult.failure(
+        ErrorHandler.handle(error),
+      );
+    }
   }
 }

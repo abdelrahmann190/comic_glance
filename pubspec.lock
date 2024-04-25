@@ -321,14 +321,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
-  equatable:
-    dependency: "direct main"
-    description:
-      name: equatable
-      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -657,7 +649,7 @@ packages:
     source: hosted
     version: "2.0.1"
   html:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: html
       sha256: "3a7812d5bcd2894edf53dfaf8cd640876cf6cef50a8f238745c8b8120ea74d3a"
@@ -688,14 +680,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  internet_connection_checker_plus:
-    dependency: "direct main"
-    description:
-      name: internet_connection_checker_plus
-      sha256: "7daf4458c62923f4c7f3b54b1b3191bc3d8813e69a45722ef0ff5fc3ef2ef686"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   intl:
     dependency: "direct main"
     description:
@@ -1446,7 +1430,7 @@ packages:
     source: hosted
     version: "2.4.0"
   webview_flutter:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: webview_flutter
       sha256: d81b68e88cc353e546afb93fb38958e3717282c5ac6e5d3be4a4aef9fc3c1413

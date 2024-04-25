@@ -8,10 +8,10 @@ Jump to the [Getting Started](#getting-started) section below to set up the appl
 <summary>Tap to show/hide screenshots</summary>
 
 <div>
-<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/1.jpg" width="250">
-<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/2.jpg" width="250">
-<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/3.jpg" width="250">
-<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/4.jpg" width="250">
+<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/1.jpg" width="150">
+<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/2.jpg" width="150">
+<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/3.jpg" width="150">
+<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/4.jpg" width="150">
 </div>
 </details>
 

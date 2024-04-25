@@ -18,7 +18,6 @@ import 'package:comic_glance/features/signup/data/repo/sign_up_repo.dart';
 import 'package:comic_glance/features/signup/logic/cubit/signup_cubit.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final GetIt getItInstance = GetIt.instance;
@@ -42,11 +41,6 @@ class GetitDI {
     final sharedPreferences = await SharedPreferences.getInstance();
     getItInstance.registerLazySingleton(
       () => sharedPreferences,
-    );
-
-    /// internet checker package
-    getItInstance.registerLazySingleton(
-      () => InternetConnection(),
     );
 
     /// App Shared Preferenecse

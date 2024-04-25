@@ -1,12 +1,19 @@
 # comic_glance: Comic books browsing project
 
-A new Flutter project.
-
-## Getting Started
-
 ComicGlance is an open-source comic books browsing application that exemplifies clean architecture principles while leveraging the power of [Bloc](https://pub.dev/packages/flutter_bloc) for state management. The app utilizes [Comic Vine API](https://comicvine.gamespot.com/api/) to provide users with an immersive movie discovery experience. With dependency injection powered by [get_it](https://pub.dev/packages/get_it), remote API calls managed by [dio](https://pub.dev/packages/dio) and [retrofit](https://pub.dev/packages/retrofit), and local data storage utilizing [hive](https://pub.dev/packages/hive).
 
 Jump to the [Getting Started](#getting-started) section below to set up the application on your local machine.
+
+<details open>
+<summary>Tap to show/hide screenshots</summary>
+
+<div>
+<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/1.jpeg" width="250">
+<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/2.jpeg" width="250">
+<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/3.jpeg" width="250">
+<img src="https://github.com/abdelrahmann190/comic_glance/raw/main/screenshots/4.jpeg" width="250">
+</div>
+</details>
 
 ## Features
 
